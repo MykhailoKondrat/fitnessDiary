@@ -3,13 +3,11 @@
 .Toolbar{
   background: red;
 }
-.customCheckbox{
+.customCheckboxLabel{
   @include defaultCard
   height: 54px;
   display: flex;
-  justify-content: start;
   padding: 16px;
-  font-size: 1.1rem;
   align-items: center;
   color: change-color($mainColor,$saturation:90,$lightness: 70);
 
@@ -21,17 +19,39 @@
     stroke-width:20;
     margin-right: 16px;
   }
+  p{
+    margin: 0;
+  }
+  .exName{
+    font-size: 1.1rem;
+  }
+  .exDesc{
+    font-size: .8rem;
+    color: change-color($mainColor,$saturation:50,$lightness: 80);
+  }
+  .exType{
+    font-weight: 400;
+    color: change-color($mainColor,$saturation:50,$lightness: 80);
+    text-transform: uppercase;
+    font-size: .6rem;
+  }
  &:hover {
    color: $mainColor;
  }
 }
-
 .checkboxInput{
   display: none;
 }
-input[type="checkbox"]:checked + .customCheckbox {
-  color:  change-color($mainColor,$saturation:80,$lightness: 40);
-  font-weight: bold;
+
+input[type="checkbox"]:checked + .customCheckboxLabel {
+  .exName {
+    color: change-color($mainColor, $saturation: 80, $lightness: 40);
+    font-weight: bold;
+    .exType{
+      font-weight: 400;
+      color: change-color($mainColor,$saturation:50,$lightness: 80);
+    }
+  }
 
   & .checkIcon{
     fill: change-color($mainColor,$saturation:80,$lightness: 40);
