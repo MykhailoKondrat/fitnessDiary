@@ -1,0 +1,31 @@
+@import '../../../../app/_variables.module.scss';
+.navBarTab{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  //fill: change-color($mainColor,$saturation:90,$lightness: 70);
+  fill : none;
+  background: white;
+  stroke: change-color($mainColor,$saturation:90,$lightness: 70);
+  stroke-width:20;
+  @include defaultShadow;
+  outline: none;
+  cursor: pointer;
+  &:first-child{
+    border-radius: 0 8px 0 0;
+  }
+  &:last-child{
+    border-radius: 8px 0 0 0;
+  }
+  &.active{
+    fill: $mainColor;
+    border-bottom: 3px solid $mainColor;
+    z-index: 100;
+    stroke-width:0;
+
+  }
+
+}

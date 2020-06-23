@@ -1,0 +1,28 @@
+@import '../../app/_variables.module.scss';
+
+.WorkoutWrap{
+ @include defaultCard;
+  .date{
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: change-color($mainColor,$saturation:50,$lightness: 80);
+
+    font-weight: 700;
+    padding-left: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin: 0;
+  }
+  .WorkoutHeader{
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid change-color($mainColor,$saturation:90,$lightness: 90);
+    height: 48px;
+    display: flex;
+    align-items: center;
+  }
+  .ExercisesWrap{
+    padding:16px;
+    margin: auto 8px ;
+
+  }
+}

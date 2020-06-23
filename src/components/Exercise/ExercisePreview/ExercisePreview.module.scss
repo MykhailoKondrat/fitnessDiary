@@ -1,0 +1,59 @@
+@import '../../../app/_variables.module.scss';
+.exercise{
+  border-left: 5px solid change-color($mainColor,$saturation:30,$lightness: 60);
+  padding-left: 24px;
+  margin-bottom: 48px;
+  padding-top: 10px;
+  padding-bottom: 0;
+  .exerciseName{
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .totalWeight{
+    font-size: .8rem;
+    margin-top: 0;
+    margin-bottom:4px;
+    text-transform: uppercase;
+    color: change-color($mainColor,$saturation:50,$lightness: 70);
+    span{
+      font-weight: 700;
+    }
+  }
+  .setList{
+    padding-inline-start: 0px;
+    margin-top: 0;
+    border-radius: 4px;
+    display: inline-flexflex;
+    li{
+      display: inline-flex;
+      height: 24px;
+      flex-basis:auto;
+      align-items: center;
+      margin: 16px 24px 4px 0;
+      padding: 8px 24px 8px 0;
+      font-size: 1rem;
+      color: change-color($mainColor,$saturation:30,$lightness: 60) ;
+      border-right:1px dashed  change-color($mainColor,$saturation:50,$lightness: 85);
+      &:last-child{
+        border-right: none;
+      }
+    }
+  }
+
+  &:last-child{
+    margin-bottom: 0;
+    ul{
+      margin-bottom: 0;
+    }
+  }
+  //&:after{
+  //  height: 1px;
+  //  background: change-color($mainColor,$saturation:50,$lightness: 75);
+  //  width: 100%;
+  //  content: "";
+  //  display: block;
+  //}
+}

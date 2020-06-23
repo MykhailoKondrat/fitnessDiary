@@ -1,0 +1,20 @@
+@import '../../../../app/_variables.module.scss';
+.AddNewItemButton{
+  align:center;
+  background: $mainColor;
+  width: 80%;
+  max-width: 400px;
+  margin: 32px auto;
+  height: 40px;
+  border:1px solid change-color($mainColor,$saturation:90,$lightness: 70);
+  border-radius: 80px;
+  font-weight: 700;
+  color: change-color($mainColor,$saturation:90,$lightness: 70);
+  background: none;
+  text-transform: uppercase;
+  outline: none;
+  &:active{
+    background: $mainColor;
+    color: white;
+  }
+}

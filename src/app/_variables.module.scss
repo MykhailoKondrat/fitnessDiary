@@ -1,0 +1,28 @@
+@use "sass:color";
+
+$mainColor: hsl(224,98,56);
+$mainFontColor:  change-color($mainColor,$saturation:40,$lightness: 30);
+$secondaryFontColor:  change-color($mainColor,$saturation:60,$lightness: 50);
+$secondaryColor: rgba(69,188,252,1);
+$tetriaryColor: rgba(131,58,180,1);
+$mainFont: "Roboto",sans-serif;
+$mainGradient: linear-gradient(41deg, rgba(131,58,180,1) 0%, rgba(29,92,253,1) 50%, rgba(69,188,252,1) 100%);
+$defaultFontSize: 16px;
+
+@mixin defaultShadow{
+  box-shadow: 0 4px 20px 0 rgba(32,52,109,0.30);
+
+}
+@mixin defaultCard{
+  @include defaultShadow;
+  border-radius: 8px;
+  background: white;
+  margin-bottom: 8px;
+  width: 100%;
+
+}
+
+//*{ box-sizing: border-box;
+//  padding: 0;
+//  margin: 0;
+//}

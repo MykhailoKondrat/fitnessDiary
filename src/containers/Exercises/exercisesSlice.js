@@ -4,6 +4,7 @@ import { workoutSlice } from "../Workouts/workoutsSlice";
 
 // list of available exercises
 // requires name, type(related body part), ?description,
+// Thats why we need TS :)
 
 const exercisesTypes = {
   legs: "legs",
@@ -24,12 +25,12 @@ const availableExercises = [
   {
     name: "Pushups",
     type: exercisesTypes.arms,
-    description: "",
+    description: "Easy peasy",
   },
   {
     name: "Bench press",
     type: exercisesTypes.chest,
-    description: "",
+    description: "Best & only way to gain chest mussles!",
   },
 ];
 const exercisesInit = {

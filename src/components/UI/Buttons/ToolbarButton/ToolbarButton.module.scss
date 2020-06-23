@@ -1,0 +1,20 @@
+@import '../../../../app/_variables.module.scss';
+.toolbarButton{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  fill: white;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+
+  & :hover {
+    fill: #ccc;
+
+  }
+}

@@ -1,0 +1,10 @@
+@import "./app/normalize";
+@import "app/variables.module";
+@use "sass:color";
+
+body{
+  font-family: $mainFont;
+  background: change-color($mainColor,$saturation:97,$lightness: 97);
+  color: $mainFontColor;
+}
+@include normalize();

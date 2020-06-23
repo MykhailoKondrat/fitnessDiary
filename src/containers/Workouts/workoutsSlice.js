@@ -9,8 +9,8 @@ const workoutInit = {
       exercises: [
         {
           name: "Bench press",
-          reps: [10, 10, 20, 10],
-          weight: [50, 50, 20, 50],
+          reps: [10, 100, 10, 100, 10, 100, 10],
+          weight: [50, 50, 20, 50, 20, 100, 10],
         },
         { name: "Pushups", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
         { name: "Squats", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
@@ -18,12 +18,12 @@ const workoutInit = {
     },
     {
       id: uuid(),
-      date: "12 Oct 2020",
+      date: "13 Oct 2020",
       exercises: [
         {
           name: "Bench press",
-          reps: [10, 10, 20, 10],
-          weight: [50, 50, 20, 50],
+          reps: [1],
+          weight: [1],
         },
         { name: "Pushups", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
         { name: "Squats", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
@@ -31,7 +31,7 @@ const workoutInit = {
     },
     {
       id: uuid(),
-      date: "12 Oct 2020",
+      date: "14 Oct 2020",
       exercises: [
         {
           name: "Bench press",

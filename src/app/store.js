@@ -6,7 +6,7 @@ import exerciseReducer from "../containers/Exercises/exercisesSlice";
 export default configureStore({
   reducer: {
     counter: counterReducer,
-    wokrout: workoutReducer,
+    workout: workoutReducer,
     exercise: exerciseReducer,
   },
 });

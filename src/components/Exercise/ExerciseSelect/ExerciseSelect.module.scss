@@ -1,0 +1,43 @@
+@import '../../../app/_variables.module.scss';
+
+.Toolbar{
+  background: red;
+}
+.customCheckbox{
+  @include defaultCard
+  height: 54px;
+  display: flex;
+  justify-content: start;
+  padding: 16px;
+  font-size: 1.1rem;
+  align-items: center;
+  color: change-color($mainColor,$saturation:90,$lightness: 70);
+
+  .checkIcon{
+    width: 24px;
+    height: 24px;
+    fill: white;
+    stroke: change-color($mainColor,$saturation:90,$lightness: 70);
+    stroke-width:20;
+    margin-right: 16px;
+  }
+ &:hover {
+   color: $mainColor;
+ }
+}
+
+.checkboxInput{
+  display: none;
+}
+input[type="checkbox"]:checked + .customCheckbox {
+  color:  change-color($mainColor,$saturation:80,$lightness: 40);
+  font-weight: bold;
+
+  & .checkIcon{
+    fill: change-color($mainColor,$saturation:80,$lightness: 40);
+    stroke-width:0 ;
+  }
+  &:hover {
+    color: $mainColor;
+  }
+}

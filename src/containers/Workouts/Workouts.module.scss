@@ -1,0 +1,36 @@
+
+@import '../../app/_variables.module.scss';
+.buttonWrapper{
+  //this div is here only to center button :((((
+  width: 100%;
+  text-align: center;
+}
+.EmptyHistoryPlaceholderWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 80vh;
+  flex-direction: column;
+  p{
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 80px;
+    margin-bottom: 0;
+  }
+  .illustrationWrap{
+    width: 300px;
+    height: 300px;
+    background: change-color($mainColor,$saturation:30,$lightness: 90);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5000px;
+    .illustration{
+      margin-top: 100px;
+      width: 200px;
+      height: 200px;
+    }
+  }
+}

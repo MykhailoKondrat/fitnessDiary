@@ -1,0 +1,8 @@
+@import 'normalize/variables';
+@import 'normalize/vertical-rhythm';
+@import 'normalize/normalize-mixin';
+
+*{
+  box-sizing: border-box;
+}
+// idk why default normailze doesn't set's it, this might be not a bast way to change box-sizing globaly though
