@@ -5,13 +5,14 @@ import * as styles from "./App.module.scss";
 import Workouts from "./containers/Workouts/Workouts";
 import DietTracker from "./containers/DietTracker/DietTracker";
 import Layout from "./containers/hoc/Layout/Layout";
-import Exercises from "./containers/Exercises/Exercises";
+import AddExercises from "./containers/Exercises/AddExercises";
 import { completeWorkoutActionCreator } from "./containers/Workouts/workoutsSlice";
 import {
   addExerciseActionCreator,
   removeExerciseActionCreator,
   addSetActionCreator,
 } from "./containers/Exercises/exercisesSlice";
+import CurrentWokrout from "./containers/Workouts/CurrentWorkout/CurrentWokrout";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -36,8 +37,12 @@ const App = (props) => {
           )}
         />
         <Route
-          path="/addExersicesToWorkout"
-          render={(props) => <Exercises />}
+          path="/add_exersices_to_workout"
+          render={(props) => <AddExercises />}
+        />
+        <Route
+          path="/wokrout_in_progress"
+          render={(props) => <CurrentWokrout />}
         />
         <Redirect to="/workouts" />
       </Switch>

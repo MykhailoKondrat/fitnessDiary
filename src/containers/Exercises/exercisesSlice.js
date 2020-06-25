@@ -7,13 +7,13 @@ import { workoutSlice } from "../Workouts/workoutsSlice";
 // Thats why we need TS :)
 
 const exercisesTypes = {
-  legs: "legs",
-  arms: "arms",
-  fullBody: "fullBody",
-  chest: "chest",
-  back: "back",
-  biceps: "biceps",
-  triceps: "triceps",
+  legs: "Legs",
+  arms: "Arms",
+  fullBody: "FullBody",
+  chest: "Chest",
+  back: "Back",
+  biceps: "Biceps",
+  triceps: "Triceps",
 };
 // this should be fetched from Firebase
 const availableExercises = [
@@ -32,30 +32,22 @@ const availableExercises = [
     type: exercisesTypes.chest,
     description: "Best & only way to gain chest mussles!",
   },
+  {
+    name: "Declined Bench press",
+    type: exercisesTypes.chest,
+    description: "Best & only way to gain chest mussles!",
+  },
 ];
 const exercisesInit = {
   availableExercises,
-  selectedExercises: [
-    {
-      name: "Squats",
-      id: 111,
-      reps: [],
-      weight: [],
-    },
-  ],
+  selectedExercises: [],
 };
 export const exercisesSlice = createSlice({
   name: "exercises",
   initialState: exercisesInit,
   reducers: {
     addExercise: (state, { payload }) => {
-      const tempExerciseToAdd = {
-        name: availableExercises[0].name,
-        id: 111,
-        reps: [],
-        weight: [],
-      }; // should be removed, just for testiing purposes here
-      state.selectedExercises.push(tempExerciseToAdd);
+      state.selectedExercises = payload;
     },
     removeExercise: (state, { payload }) => {
       const indexToRemove = state.selectedExercises.find(

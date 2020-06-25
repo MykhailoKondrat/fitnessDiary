@@ -3,7 +3,11 @@ import classes from "./FloatingConfirmButton.module.scss";
 
 const FloatingConfirmButton = (props) => {
   return (
-    <button onClick={props.click} className={classes.FloatingButton}>
+    <button
+      type={props.type}
+      onClick={props.click}
+      className={classes.FloatingButton}
+    >
       {props.children}
 {" "}
     </button>

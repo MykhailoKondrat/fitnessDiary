@@ -24,27 +24,30 @@ const Toolbar = (props) => {
       case "Menu":
         return (iconOutput = <MenuIcon width="100%" height="32px" />);
       default:
-        return (iconOutput = "");
+        return (iconOutput = null);
     }
   };
   const confirmIcon = figureOutIconToUse(props.confirmIcon);
   const declineIcon = figureOutIconToUse(props.declineIcon);
+  // TODO - conditionally add classes to  tollbar  based on existing of icons.
+  // const mystyle = [classes.Toolbar, classes.test].join(" ");
+  // className={[classes.Button, classes[props.btnType]].join(' ')}
 
   return (
     <div className={classes.Toolbar}>
       <ToolbarButton
         className={classes.declineAction}
         click={props.declineAction}
-        hidden={!!props.decline}
+        // hidden={!props.declineIcon}
       >
         {declineIcon}
-{" "}
       </ToolbarButton>
       <p className={classes.Headline}> {props.children}</p>
       <ToolbarButton
         className={classes.confirmAction}
         click={props.confirmAction}
-        hidden={!!props.confirm}
+        hidden={!props.confirmIcon}
+        // disabled={!props.confirmIcon}
       >
         {confirmIcon}
       </ToolbarButton>

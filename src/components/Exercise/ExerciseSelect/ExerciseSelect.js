@@ -7,6 +7,10 @@ const ExerciseSelect = (props) => {
   // const handleOnChange = (e) => {
   //   console.log(e.target.checked);
   // };
+
+  const onChangeHandlerTest = (e) => {
+    console.log(e.target.id, "was changed");
+  };
   return (
     <>
       <input
@@ -14,7 +18,7 @@ const ExerciseSelect = (props) => {
         id={props.children}
         name={props.name}
         className={classes.checkboxInput}
-        // onChange={handleOnChange}
+        onChange={props.change}
       />
       <label className={classes.customCheckboxLabel} htmlFor={props.children}>
         <CheckIcon className={classes.checkIcon} />

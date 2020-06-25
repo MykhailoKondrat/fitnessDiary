@@ -13,7 +13,7 @@ const Workouts = (props) => {
 
   const history = useHistory();
   const handleClick = () => {
-    history.push("/addExersicesToWorkout");
+    history.push("/add_exersices_to_workout");
   };
 
   if (workoutHistory) {
@@ -21,22 +21,18 @@ const Workouts = (props) => {
       <>
         <div className={classes.buttonWrapper}>
           <AddNewItemButton clicked={handleClick}>
-            {" "}
             Start New Workout
-{" "}
           </AddNewItemButton>
         </div>
         {/* ^^^^^this div is here only to center button :(((( */}
         {workoutHistory &&
           workoutHistory.map((workoutItem) => {
             return (
-              workoutHistory && (
-                <Workout
-                  key={workoutItem.id}
-                  date={workoutItem.date}
-                  exercises={workoutItem.exercises}
-                />
-              )
+              <Workout
+                key={workoutItem.id}
+                date={workoutItem.date}
+                exercises={workoutItem.exercises}
+              />
             );
           })}
       </>
@@ -48,7 +44,11 @@ const Workouts = (props) => {
           <Illustration className={classes.illustration} />
         </div>
         <p>Start your first workout!</p>
-        <AddNewItemButton> Start First Workout </AddNewItemButton>
+        <AddNewItemButton clicked={handleClick}>
+          {" "}
+          Start First Workout
+{" "}
+        </AddNewItemButton>
       </div>
     );
   }

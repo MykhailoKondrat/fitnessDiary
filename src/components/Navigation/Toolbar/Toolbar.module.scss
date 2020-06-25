@@ -16,12 +16,15 @@
   .Headline {
     margin: 0;
     font-size: 1rem;
+    align-self: center;
   }
 
 }
-
+.test{
+  background: red;
+}
 .confirmAction{
-  //tbd
+
   & :hover {
   }
 }
