@@ -1,0 +1,45 @@
+@import '../../../app/_variables.module.scss';
+.Wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.addSet{
+  z-index: 500;
+  position: fixed;
+  background: white;
+  @include defaultCard
+  width: 80%;
+  margin-top: 48px;
+  min-height: 128px;
+  padding: 16px;
+  .addSetForm{
+    display: flex;
+    height: 48px;
+    .inputs{
+      flex-grow: 1;
+      margin-right: 24px;
+    }
+  }
+}
+.previousSets{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  position: fixed;
+  z-index: 400;
+  margin-top: 150px;
+  @include defaultCard
+  width: 70%;
+  max-height: 65vh;
+  overflow: scroll;
+  .listOfSets{
+    width: 100%;
+    padding-inline-start: 0;
+  }
+}
+.floatingButton{
+  z-index: 500;
+  border: 1px solid red;
+}

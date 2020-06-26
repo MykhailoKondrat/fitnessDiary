@@ -7,7 +7,7 @@ const ExercisePreview = (props) => {
   const totalWeight = props.weight
     ? props.weight.reduce((acc, curr) => acc + curr) *
       props.reps.reduce((acc, curr) => acc + curr)
-    : "no weights lifted";
+    : null;
 
   return (
     <div className={classes.exercise}>
@@ -19,22 +19,15 @@ const ExercisePreview = (props) => {
             <span>{`${totalWeight} kg`}</span>
           </p>
         </div>
-        {props.editable ? (
+        {props.editable && (
           <div className={classes.iconWrapper}>
             <AddIcon className={classes.addIcon} onClick={props.edit} />
           </div>
-        ) : null}
+        )}
       </div>
       <ul className={classes.setList}>
         {props.reps.map((rep, id) => {
-          return (
-            <li key={id}>
-              {rep}
-              &nbsp; x &nbsp;
-              {props.weight[id]}
-              kg
-            </li>
-          );
+          return <li key={id}>{`${rep} x ${props.weight[id]}kg`}</li>;
         })}
       </ul>
     </div>

@@ -1,0 +1,21 @@
+@import '../../../../app/_variables.module.scss';
+
+.valueInput{
+  height: 48px;
+  border: 1px solid change-color($mainColor,$saturation:50,$lightness: 80);
+  font-size: .8rem;
+  display: inline;
+  text-align: center;
+  width: 50%;
+  outline: none;
+  &:first-of-type{
+    border-radius: 40px 0 0 40px;
+  }
+  &:last-of-type{
+    border-radius: 0px 40px  40px 0;
+  }
+  &:focus{
+    border: 2px solid $mainColor;
+    background: change-color($mainColor,$saturation:10,$lightness: 95);
+  }
+}

@@ -9,17 +9,7 @@
   width: 26px;
   height: 26px;
   .addIcon{
-    width: 24px;
-    height: 24px;
-    margin-bottom: 4px;
-    cursor: pointer;
-    fill: change-color($mainColor,$saturation:90,$lightness: 70);
-    &:hover{
-      fill: $mainColor;
-    }
-    &:active{
-      fill: change-color($mainColor,$saturation:70,$lightness: 40);
-    }
+    @include iconAction;
   }
 }
 

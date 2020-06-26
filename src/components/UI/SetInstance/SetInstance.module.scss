@@ -1,0 +1,22 @@
+@import '../../../app/_variables.module.scss';
+
+.set{
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2rem;
+  font-weight: lighter;
+  height: 80px;
+  border-bottom:1px dashed  change-color($mainColor,$saturation:50,$lightness: 85);
+  .reps{
+
+  }
+  .weight{
+  }
+  .deleteIcon{
+    float: right;
+    margin-top: 8px;
+    @include iconAction;
+  }
+}

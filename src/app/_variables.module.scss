@@ -20,8 +20,42 @@ $defaultFontSize: 16px;
   background: white;
   margin-bottom: 8px;
   width: 100%;
-
 }
+@mixin purpleButton {
+  margin: auto;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  color: white;
+  fill: white;
+  background: linear-gradient(225deg, #AC46F0 0%, #9840D3 52%, #863AB9 100%);
+  @include defaultShadow;
+  cursor: pointer;
+  &:hover{
+    background: change-color($tetriaryColor,$saturation:50,$lightness: 40);
+
+  }
+  &:active{
+    background: change-color($tetriaryColor,$saturation:60,$lightness: 30);
+  }
+}
+
+@mixin iconAction{
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  fill: change-color($mainColor,$saturation:90,$lightness: 70);
+  &:hover{
+    fill: $mainColor;
+  }
+  &:active{
+    fill: change-color($mainColor,$saturation:70,$lightness: 40);
+  }
+}
+
+
+
 
 //*{ box-sizing: border-box;
 //  padding: 0;

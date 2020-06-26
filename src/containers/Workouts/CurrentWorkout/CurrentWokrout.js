@@ -6,14 +6,22 @@ import AddNewItemButton from "../../../components/UI/Buttons/AddNewItemButton/Ad
 import Toolbar from "../../../components/Navigation/Toolbar/Toolbar";
 import FloatingConfirmButton from "../../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";
 import Backdrop from "../../../components/UI/Backdrop/Backdrop";
+import ExerciseModifySets from "../../../components/Exercise/ExerciseModifySets/ExerciseModifySets";
 
 const CurrentWokrout = (props) => {
   const selectedExercises = useSelector(
     (state) => state.exercise.selectedExercises
   );
-  const [editExercise, setEditExercise] = useState(false);
+  const [editExerciseMode, setEditExerciseMode] = useState(false);
+  const [selectedExercise, setSelectedExercise] = useState(null);
   const handleEditExercise = (name) => {
-    setEditExercise(true);
+    console.log(name);
+    setSelectedExercise(name);
+    setEditExerciseMode(true);
+  };
+  const handleClose = () => {
+    setSelectedExercise(null);
+    setEditExerciseMode(false);
   };
   console.log(selectedExercises);
   // getting date
@@ -27,6 +35,12 @@ const CurrentWokrout = (props) => {
   console.log(currentDate);
   return (
     <>
+      {editExerciseMode && (
+        <ExerciseModifySets
+          selectedExerciseName={selectedExercise}
+          close={handleClose}
+        />
+      )}
       {/* <Backdrop show={editExercise} /> */}
       <Toolbar>
         Current Workout,
@@ -40,7 +54,9 @@ const CurrentWokrout = (props) => {
           date="Tap on exercise to add Sets"
           exercises={selectedExercises}
         />
-        <FloatingConfirmButton>Complete Workout</FloatingConfirmButton>
+        <FloatingConfirmButton key="CompleteWorkout">
+          Complete Workout
+        </FloatingConfirmButton>
       </div>
     </>
   );

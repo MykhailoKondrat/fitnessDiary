@@ -45,9 +45,7 @@ const Workouts = (props) => {
         </div>
         <p>Start your first workout!</p>
         <AddNewItemButton clicked={handleClick}>
-          {" "}
           Start First Workout
-{" "}
         </AddNewItemButton>
       </div>
     );

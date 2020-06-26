@@ -1,0 +1,11 @@
+@import '../../../../app/_variables.module.scss';
+
+.iconButton{
+  min-width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  outline: none;
+  padding: 4px 0 0 1px;
+  @include purpleButton;
+
+}
