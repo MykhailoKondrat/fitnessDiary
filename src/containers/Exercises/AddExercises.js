@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import classes from "./Exercises.module.scss";
+import classes from "./AddExercises.module.scss";
 import ExerciseSelect from "../../components/Exercise/ExerciseSelect/ExerciseSelect";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import FloatingConfirmButton from "../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";

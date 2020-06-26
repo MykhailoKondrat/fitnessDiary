@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./ExercisePreview.module.scss";
+import { ReactComponent as AddIcon } from "../../../assets/icons/plus.svg";
 
 const ExercisePreview = (props) => {
   // total weight lifted during exrecise
@@ -10,14 +11,20 @@ const ExercisePreview = (props) => {
 
   return (
     <div className={classes.exercise}>
-      <p className={classes.exerciseName}>{props.name}</p>
-      <p className={classes.totalWeight}>
-        Total Weight:&nbsp;
-        <span>{totalWeight}
-{' '}
-kg
-</span>
-      </p>
+      <div className={classes.headline}>
+        <div>
+          <p className={classes.exerciseName}>{props.name}</p>
+          <p className={classes.totalWeight}>
+            Total Weight:&nbsp;
+            <span>{`${totalWeight} kg`}</span>
+          </p>
+        </div>
+        {props.editable ? (
+          <div className={classes.iconWrapper}>
+            <AddIcon className={classes.addIcon} onClick={props.edit} />
+          </div>
+        ) : null}
+      </div>
       <ul className={classes.setList}>
         {props.reps.map((rep, id) => {
           return (

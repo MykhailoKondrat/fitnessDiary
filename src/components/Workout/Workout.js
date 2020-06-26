@@ -7,9 +7,11 @@ const Workout = (props) => {
     return (
       <ExercisePreview
         key={id}
+        edit={() => props.editExercies(exercise.name)}
         name={exercise.name}
         reps={exercise.reps}
         weight={exercise.weight}
+        editable={props.editable}
       />
     );
   });

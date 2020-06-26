@@ -1,4 +1,28 @@
 @import '../../../app/_variables.module.scss';
+.headline{
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+  align-items: center;
+}
+.iconWrapper{
+  width: 26px;
+  height: 26px;
+  .addIcon{
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    fill: change-color($mainColor,$saturation:90,$lightness: 70);
+    &:hover{
+      fill: $mainColor;
+    }
+    &:active{
+      fill: change-color($mainColor,$saturation:70,$lightness: 40);
+    }
+  }
+}
+
 .exercise{
   border-left: 5px solid change-color($mainColor,$saturation:30,$lightness: 60);
   padding-left: 24px;

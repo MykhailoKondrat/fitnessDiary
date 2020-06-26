@@ -1,0 +1,14 @@
+@import '../../../app/_variables.module.scss';
+
+.Backdrop{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 200;
+  left:0;
+  top:0;
+  background-color: change-color($mainColor,$saturation:30,$lightness: 60);
+  opacity: .8;
+}
+
+

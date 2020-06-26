@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import classes from "./CurrentWokrout.module.scss";
 import Workout from "../../../components/Workout/Workout";
 import AddNewItemButton from "../../../components/UI/Buttons/AddNewItemButton/AddNewItemButton";
 import Toolbar from "../../../components/Navigation/Toolbar/Toolbar";
 import FloatingConfirmButton from "../../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";
+import Backdrop from "../../../components/UI/Backdrop/Backdrop";
 
 const CurrentWokrout = (props) => {
   const selectedExercises = useSelector(
     (state) => state.exercise.selectedExercises
   );
+  const [editExercise, setEditExercise] = useState(false);
+  const handleEditExercise = (name) => {
+    setEditExercise(true);
+  };
   console.log(selectedExercises);
   // getting date
   const getCurrentDate = () => {
@@ -22,6 +27,7 @@ const CurrentWokrout = (props) => {
   console.log(currentDate);
   return (
     <>
+      {/* <Backdrop show={editExercise} /> */}
       <Toolbar>
         Current Workout,
         {` ${currentDate}`}
@@ -29,6 +35,8 @@ const CurrentWokrout = (props) => {
       <div className={classes.content}>
         <AddNewItemButton clicked={() => {}}>Add exercise</AddNewItemButton>
         <Workout
+          editable
+          editExercies={handleEditExercise}
           date="Tap on exercise to add Sets"
           exercises={selectedExercises}
         />
