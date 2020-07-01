@@ -5,7 +5,7 @@ import * as styles from "./App.module.scss";
 import Workouts from "./containers/Workouts/Workouts";
 import DietTracker from "./containers/DietTracker/DietTracker";
 import Layout from "./containers/hoc/Layout/Layout";
-import AddExercises from "./containers/Exercises/AddExercises";
+import AddExercises from "./containers/Exercises/AddExercises/AddExercises";
 import { completeWorkoutActionCreator } from "./containers/Workouts/workoutsSlice";
 import {
   addExerciseActionCreator,

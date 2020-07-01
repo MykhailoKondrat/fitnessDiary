@@ -58,14 +58,23 @@ export const exercisesSlice = createSlice({
       }
     },
     addSet: (state, { payload }) => {
-      // id of Current Exercise, weight, reps
-      const tempReps = 12;
-      const tempWeigh = 10;
-      const tempExerciseIndex = 1;
-      if (state.selectedExercises[tempExerciseIndex]) {
-        state.selectedExercises[tempExerciseIndex].reps.push(tempReps);
-        state.selectedExercises[tempExerciseIndex].weight.push(tempWeigh);
-      }
+      // name of Current Exercise, weight, rep
+      const { sets, selectedExercise } = payload;
+      state.selectedExercises.forEach((ex) => {
+        if (ex.name === selectedExercise) {
+          ex.reps = sets.reps;
+          ex.weight = sets.weight;
+        }
+      });
+      // for (let i = 0; i <= state.selectedExercises.length; i++) {
+      //   if ((state.selectedExercises[i].name = selectedExercise)) {
+      //     console.log("urraaa");
+      //   }
+      // }
+      // state.selectedExercises[selectedExercise].reps = sets.reps;
+      // state.selectedExercises[selectedExercise].weight = sets.weight;
+      // if (state.selectedExercises[selectedExercise]) {
+      // }
     },
   },
 });

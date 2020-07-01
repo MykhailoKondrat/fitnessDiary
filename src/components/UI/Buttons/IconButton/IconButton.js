@@ -3,7 +3,12 @@ import classes from "./IconButton.module.scss";
 
 const IconButton = (props) => {
   return (
-    <button type="submit" className={classes.iconButton}>
+    <button
+      type="submit"
+      className={classes.iconButton}
+      onClick={props.click}
+      disabled={props.disabled}
+    >
       {props.children}
     </button>
   );

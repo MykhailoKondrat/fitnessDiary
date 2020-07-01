@@ -19,6 +19,7 @@ const ExerciseSelect = (props) => {
         name={props.name}
         className={classes.checkboxInput}
         onChange={props.change}
+        checked={props.status}
       />
       <label className={classes.customCheckboxLabel} htmlFor={props.children}>
         <CheckIcon className={classes.checkIcon} />

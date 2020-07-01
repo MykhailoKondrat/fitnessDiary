@@ -1,7 +1,6 @@
 @import '../../../../app/_variables.module.scss';
 .AddNewItemButton{
   align:center;
-  background: $mainColor;
   width: 80%;
   max-width: 400px;
   margin: 32px auto;
@@ -13,6 +12,11 @@
   background: none;
   text-transform: uppercase;
   outline: none;
+  &:hover{
+    background: change-color($mainColor,$saturation:90,$lightness: 70);
+    color: white;
+
+  }
   &:active{
     background: $mainColor;
     color: white;

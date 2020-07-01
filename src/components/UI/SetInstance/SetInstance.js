@@ -9,7 +9,7 @@ const SetInstance = (props) => {
         <strong>{props.id}</strong>
         {`${props.reps} x ${props.weight}kg`}
       </span>
-      <DeleteIcon className={classes.deleteIcon} onClick={props.clicked} />
+      <DeleteIcon className={classes.deleteIcon} onClick={props.deleteSet} />
     </li>
   );
 };

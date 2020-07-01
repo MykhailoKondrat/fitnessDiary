@@ -4,10 +4,11 @@ import { ReactComponent as AddIcon } from "../../../assets/icons/plus.svg";
 
 const ExercisePreview = (props) => {
   // total weight lifted during exrecise
-  const totalWeight = props.weight
-    ? props.weight.reduce((acc, curr) => acc + curr) *
-      props.reps.reduce((acc, curr) => acc + curr)
-    : null;
+  const totalWeight =
+    props.weight.length !== 0
+      ? props.weight.reduce((acc, curr) => acc + curr) *
+        props.reps.reduce((acc, curr) => acc + curr)
+      : null;
 
   return (
     <div className={classes.exercise}>
@@ -15,8 +16,11 @@ const ExercisePreview = (props) => {
         <div>
           <p className={classes.exerciseName}>{props.name}</p>
           <p className={classes.totalWeight}>
-            Total Weight:&nbsp;
-            <span>{`${totalWeight} kg`}</span>
+            <span>
+              {totalWeight
+                ? `Total Weight ${totalWeight} kg`
+                : "No sets addded"}
+            </span>
           </p>
         </div>
         {props.editable && (

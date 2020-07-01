@@ -1,5 +1,5 @@
 @use "sass:color";
-
+// it might worth to rename this file to GLOBAL
 $mainColor: hsl(224,98,56);
 $mainFontColor:  change-color($mainColor,$saturation:40,$lightness: 30);
 $secondaryFontColor:  change-color($mainColor,$saturation:60,$lightness: 50);
@@ -33,10 +33,15 @@ $defaultFontSize: 16px;
   cursor: pointer;
   &:hover{
     background: change-color($tetriaryColor,$saturation:50,$lightness: 40);
-
   }
   &:active{
     background: change-color($tetriaryColor,$saturation:60,$lightness: 30);
+  }
+  &:disabled{
+    box-shadow:none;
+    background:  change-color($tetriaryColor,$saturation:30,$lightness: 70);
+    cursor: no-drop;
+
   }
 }
 

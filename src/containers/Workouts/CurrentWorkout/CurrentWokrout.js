@@ -1,29 +1,42 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useHistory } from "react-router-dom";
 import classes from "./CurrentWokrout.module.scss";
 import Workout from "../../../components/Workout/Workout";
 import AddNewItemButton from "../../../components/UI/Buttons/AddNewItemButton/AddNewItemButton";
 import Toolbar from "../../../components/Navigation/Toolbar/Toolbar";
 import FloatingConfirmButton from "../../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";
-import Backdrop from "../../../components/UI/Backdrop/Backdrop";
 import ExerciseModifySets from "../../../components/Exercise/ExerciseModifySets/ExerciseModifySets";
+import { addSetActionCreator } from "../../Exercises/exercisesSlice";
 
 const CurrentWokrout = (props) => {
-  const selectedExercises = useSelector(
-    (state) => state.exercise.selectedExercises
+  const dispatch = useDispatch();
+  const listOfExercises = useSelector(
+    (state) => state.exercise.selectedExercises,
+    shallowEqual
   );
   const [editExerciseMode, setEditExerciseMode] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
-  const handleEditExercise = (name) => {
-    console.log(name);
+
+  const history = useHistory();
+  const handleGoBack = () => {
+    history.goBack();
+  };
+  const handleEditExercise = (name, id) => {
     setSelectedExercise(name);
     setEditExerciseMode(true);
   };
-  const handleClose = () => {
+
+  const handleCloseAndUpdate = (sets) => {
+    dispatch(addSetActionCreator({ sets, selectedExercise }));
     setSelectedExercise(null);
     setEditExerciseMode(false);
+    // console.log(payload);
   };
-  console.log(selectedExercises);
+  const handleChangeWorkout = () => {
+    history.push("/add_exersices_to_workout");
+  };
+
   // getting date
   const getCurrentDate = () => {
     let date = new Date().toDateString();
@@ -31,28 +44,34 @@ const CurrentWokrout = (props) => {
     date = `${date[1]} ${date[2]}`;
     return date;
   };
+
   const currentDate = getCurrentDate();
-  console.log(currentDate);
   return (
     <>
       {editExerciseMode && (
         <ExerciseModifySets
           selectedExerciseName={selectedExercise}
-          close={handleClose}
+          close={handleCloseAndUpdate}
+          reps={listOfExercises.find((ex) => ex.name === selectedExercise).reps}
+          weight={
+            listOfExercises.find((ex) => ex.name === selectedExercise).weight
+          }
+          // pass reps and weight here
         />
       )}
-      {/* <Backdrop show={editExercise} /> */}
       <Toolbar>
         Current Workout,
         {` ${currentDate}`}
       </Toolbar>
       <div className={classes.content}>
-        <AddNewItemButton clicked={() => {}}>Add exercise</AddNewItemButton>
+        <AddNewItemButton clicked={handleChangeWorkout}>
+          {listOfExercises.length > 0 ? "Change workout" : "Add exercises"}
+        </AddNewItemButton>
         <Workout
           editable
           editExercies={handleEditExercise}
           date="Tap on exercise to add Sets"
-          exercises={selectedExercises}
+          exercises={listOfExercises}
         />
         <FloatingConfirmButton key="CompleteWorkout">
           Complete Workout

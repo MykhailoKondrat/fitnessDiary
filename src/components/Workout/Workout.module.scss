@@ -2,6 +2,7 @@
 
 .WorkoutWrap{
  @include defaultCard;
+  margin-bottom: 56px;
   .date{
     text-transform: uppercase;
     font-size: 1.1rem;
