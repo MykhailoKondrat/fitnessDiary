@@ -3,45 +3,45 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const workoutInit = {
   history: [
-    {
-      id: uuid(),
-      date: "12 Oct 2020",
-      exercises: [
-        {
-          name: "Bench press",
-          reps: [10, 100, 10, 100, 10, 100, 10],
-          weight: [50, 50, 20, 50, 20, 100, 10],
-        },
-        { name: "Pushups", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
-        { name: "Squats", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
-      ],
-    },
-    {
-      id: uuid(),
-      date: "13 Oct 2020",
-      exercises: [
-        {
-          name: "Bench press",
-          reps: [1],
-          weight: [1],
-        },
-        { name: "Pushups", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
-        { name: "Squats", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
-      ],
-    },
-    {
-      id: uuid(),
-      date: "14 Oct 2020",
-      exercises: [
-        {
-          name: "Bench press",
-          reps: [10, 10, 20, 10],
-          weight: [50, 50, 20, 50],
-        },
-        { name: "Pushups", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
-        { name: "Squats", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
-      ],
-    },
+    // {
+    //   id: uuid(),
+    //   date: "12 Oct 2020",
+    //   exercises: [
+    //     {
+    //       name: "Bench press",
+    //       reps: [10, 100, 10, 100, 10, 100, 10],
+    //       weight: [50, 50, 20, 50, 20, 100, 10],
+    //     },
+    //     { name: "Pushups", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
+    //     { name: "Squats", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
+    //   ],
+    // },
+    // {
+    //   id: uuid(),
+    //   date: "13 Oct 2020",
+    //   exercises: [
+    //     {
+    //       name: "Bench press",
+    //       reps: [1],
+    //       weight: [1],
+    //     },
+    //     { name: "Pushups", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
+    //     { name: "Squats", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
+    //   ],
+    // },
+    // {
+    //   id: uuid(),
+    //   date: "14 Oct 2020",
+    //   exercises: [
+    //     {
+    //       name: "Bench press",
+    //       reps: [10, 10, 20, 10],
+    //       weight: [50, 50, 20, 50],
+    //     },
+    //     { name: "Pushups", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
+    //     { name: "Squats", reps: [10, 10, 20, 10], weight: [50, 50, 20, 50] },
+    //   ],
+    // },
   ],
   loading: false,
   error: false,
@@ -62,11 +62,11 @@ export const workoutSlice = createSlice({
   initialState: workoutInit,
   reducers: {
     workoutCompleted: (state, { payload }) => {
-      const payloadKeys = Object.keys(payload);
-      console.log(payloadKeys[0]);
-      console.log(payloadKeys[1]);
-      console.log(this);
-      state.history.push(newWorkout);
+      // const payloadKeys = Object.keys(payload);
+      // console.log(payloadKeys[0]);
+      // console.log(payloadKeys[1]);
+      // console.log(this);
+      state.history.push(payload);
     },
   },
 });

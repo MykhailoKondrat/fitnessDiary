@@ -66,15 +66,9 @@ export const exercisesSlice = createSlice({
           ex.weight = sets.weight;
         }
       });
-      // for (let i = 0; i <= state.selectedExercises.length; i++) {
-      //   if ((state.selectedExercises[i].name = selectedExercise)) {
-      //     console.log("urraaa");
-      //   }
-      // }
-      // state.selectedExercises[selectedExercise].reps = sets.reps;
-      // state.selectedExercises[selectedExercise].weight = sets.weight;
-      // if (state.selectedExercises[selectedExercise]) {
-      // }
+    },
+    setSelectedExercises: (state, { paylaod }) => {
+      state.selectedExercises = [];
     },
   },
 });
@@ -83,6 +77,7 @@ export const {
   addExercise: addExerciseActionCreator,
   removeExercise: removeExerciseActionCreator,
   addSet: addSetActionCreator,
+  setSelectedExercises: setSelectedExercisesActionCreator,
 } = exercisesSlice.actions;
 
 export default exercisesSlice.reducer;

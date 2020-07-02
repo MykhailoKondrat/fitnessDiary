@@ -16,7 +16,7 @@ const Workouts = (props) => {
     history.push("/add_exersices_to_workout");
   };
 
-  if (workoutHistory) {
+  if (workoutHistory.length !== 0) {
     content = (
       <>
         <div className={classes.buttonWrapper}>
@@ -26,15 +26,18 @@ const Workouts = (props) => {
         </div>
         {/* ^^^^^this div is here only to center button :(((( */}
         {workoutHistory &&
-          workoutHistory.map((workoutItem) => {
-            return (
-              <Workout
-                key={workoutItem.id}
-                date={workoutItem.date}
-                exercises={workoutItem.exercises}
-              />
-            );
-          })}
+          workoutHistory
+            .slice() // because array is frozen in strict mode
+            .reverse()
+            .map((workoutItem) => {
+              return (
+                <Workout
+                  key={workoutItem.id}
+                  date={workoutItem.date}
+                  exercises={workoutItem.exercises}
+                />
+              );
+            })}
       </>
     );
   } else {

@@ -114,7 +114,7 @@ const AddExercises = (props) => {
             {ex.name}
           </ExerciseSelect>
         ))}
-        <FloatingConfirmButton type="submit">Add</FloatingConfirmButton>
+        <FloatingConfirmButton type="submit">Continue</FloatingConfirmButton>
       </form>
     </>
   );
