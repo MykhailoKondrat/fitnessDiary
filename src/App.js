@@ -15,6 +15,7 @@ import {
 import CurrentWokrout from "./containers/Workouts/CurrentWorkout/CurrentWokrout";
 import LogIn from "./containers/Auth/LogIn/LogIn";
 import SignUp from "./containers/Auth/SignUp/SignUp";
+import onLoading from "./containers/hoc/onLoading/OnLoading";
 
 const App = (props) => {
   const dispatch = useDispatch();

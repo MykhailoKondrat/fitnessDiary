@@ -9,7 +9,6 @@ import { fetchWorkoutHistory } from "./workoutsSlice";
 
 const Workouts = (props) => {
   const workoutHistory = useSelector((state) => state.workout.history);
-  // workoutHistory = null;
   let content = null;
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,6 +17,7 @@ const Workouts = (props) => {
   };
 
   useEffect(() => {
+    console.log("using FETCH Effect");
     dispatch(fetchWorkoutHistory());
   }, []);
   if (workoutHistory.length !== 0) {
@@ -58,7 +58,7 @@ const Workouts = (props) => {
     );
   }
 
-  return content;
+  return <>{content}</>;
 };
 
 export default Workouts;

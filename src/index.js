@@ -6,12 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import store from "./app/store";
 import * as serviceWorker from "./serviceWorker";
+import OnLoading from "./containers/hoc/onLoading/OnLoading";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <OnLoading>
+          <App />
+        </OnLoading>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

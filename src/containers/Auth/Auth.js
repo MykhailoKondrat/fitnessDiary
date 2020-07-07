@@ -22,7 +22,7 @@ const Auth = (props) => {
 
   const handleLogIn = () => {
     history.push("/log_in");
-    // dispatch(logInSuccessActionCreator());
+    dispatch(logInSuccessActionCreator());
   };
   const testAsyncHandler = () => {
     // dispatch(logInStartActionCreator());
@@ -38,9 +38,9 @@ const Auth = (props) => {
         Log In
       </InvertedAddNewItemButton>
       <InvertedAddNewItemButton outlined>Sign Up</InvertedAddNewItemButton>
-      {/* <InvertedAddNewItemButton click={testAsyncHandler}> */}
-      {/*  Test asyncThunk */}
-      {/* </InvertedAddNewItemButton> */}
+      <InvertedAddNewItemButton click={testAsyncHandler}>
+        Test asyncThunk
+      </InvertedAddNewItemButton>
     </div>
   );
 };
