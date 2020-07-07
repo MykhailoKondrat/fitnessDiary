@@ -29,6 +29,7 @@ const exercisesInit = {
   selectedExercises: [],
   loading: false,
   error: null,
+  upToDate: false,
 };
 export const exercisesSlice = createSlice({
   name: "exercises",
@@ -64,6 +65,7 @@ export const exercisesSlice = createSlice({
       state.availableExercises = payload.data;
       state.loading = false;
       state.error = false;
+      state.upToDate = true;
     },
     [fetchAvailableExercises.rejected]: (state, { payload }) => {
       state.loading = false;

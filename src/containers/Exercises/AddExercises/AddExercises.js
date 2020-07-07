@@ -21,12 +21,21 @@ const AddExercises = (props) => {
   const selectedExercises = useSelector(
     (state) => state.exercise.selectedExercises
   );
+  const upToDate = useSelector((state) => state.exercise.upToDate);
   // 2.Local
   const [localSelectedExercises, setLocalSelectedExercises] = useState([]);
-  // if we come to this screen from wokrout - get list of prev sleected exercises and render them as selected
   useEffect(() => {
-    dispatch(fetchAvailableExercises());
-  }, [selectedExercises]);
+    const updateAvailableExercises = () => {
+      if (!upToDate) {
+        // if someone is reading this - sorry if this is a shit code, idk how to optimize it
+        // in another way \_('')_/
+        return dispatch(fetchAvailableExercises());
+      }
+    };
+    updateAvailableExercises();
+  }, []);
+
+  // if we come to this screen from workout - get list of prev selected exercises and render them as selected
   useEffect(() => {
     const prevSelectedExercises = [];
     selectedExercises.forEach((ex) => {
