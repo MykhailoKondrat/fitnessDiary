@@ -1,6 +1,7 @@
 import { v1 as uuid } from "uuid";
-import { createSlice } from "@reduxjs/toolkit";
-import { workoutSlice } from "../Workouts/workoutsSlice";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchWorkoutHistory, workoutSlice } from "../Workouts/workoutsSlice";
+import axios from "../../axiosInstance";
 
 // list of available exercises
 // requires name, type(related body part), ?description,
@@ -15,32 +16,19 @@ const exercisesTypes = {
   biceps: "Biceps",
   triceps: "Triceps",
 };
-// this should be fetched from Firebase
-const availableExercises = [
-  {
-    name: "Squats",
-    type: exercisesTypes.legs,
-    description: "No pain no gain",
-  },
-  {
-    name: "Pushups",
-    type: exercisesTypes.arms,
-    description: "Easy peasy",
-  },
-  {
-    name: "Bench press",
-    type: exercisesTypes.chest,
-    description: "Best & only way to gain chest mussles!",
-  },
-  {
-    name: "Declined Bench press",
-    type: exercisesTypes.chest,
-    description: "Best & only way to gain chest mussles!",
-  },
-];
+export const fetchAvailableExercises = createAsyncThunk(
+  "exercises/fetchAvailableExercises",
+  async () => {
+    const response = await axios.get("/exercise/availableExercises.json");
+    return response;
+  }
+);
+
 const exercisesInit = {
-  availableExercises,
+  availableExercises: [],
   selectedExercises: [],
+  loading: false,
+  error: null,
 };
 export const exercisesSlice = createSlice({
   name: "exercises",
@@ -69,6 +57,21 @@ export const exercisesSlice = createSlice({
     },
     setSelectedExercises: (state, { paylaod }) => {
       state.selectedExercises = [];
+    },
+  },
+  extraReducers: {
+    [fetchAvailableExercises.fulfilled]: (state, { payload }) => {
+      state.availableExercises = payload.data;
+      state.loading = false;
+      state.error = false;
+    },
+    [fetchAvailableExercises.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = true;
+    },
+    [fetchAvailableExercises.pending]: (state, { payload }) => {
+      state.loading = true;
+      state.error = false;
     },
   },
 });

@@ -16,7 +16,6 @@ import {
 
 const Auth = (props) => {
   const authState = useSelector((state) => state.auth);
-  console.log(props);
   const dispatch = useDispatch();
   const history = useHistory();
 

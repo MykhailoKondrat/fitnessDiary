@@ -5,7 +5,10 @@ import classes from "./AddExercises.module.scss";
 import ExerciseSelect from "../../../components/Exercise/ExerciseSelect/ExerciseSelect";
 import Toolbar from "../../../components/Navigation/Toolbar/Toolbar";
 import FloatingConfirmButton from "../../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";
-import { addExerciseActionCreator } from "../exercisesSlice";
+import {
+  addExerciseActionCreator,
+  fetchAvailableExercises,
+} from "../exercisesSlice";
 
 const AddExercises = (props) => {
   // ###States
@@ -21,7 +24,9 @@ const AddExercises = (props) => {
   // 2.Local
   const [localSelectedExercises, setLocalSelectedExercises] = useState([]);
   // if we come to this screen from wokrout - get list of prev sleected exercises and render them as selected
-
+  useEffect(() => {
+    dispatch(fetchAvailableExercises());
+  }, [selectedExercises]);
   useEffect(() => {
     const prevSelectedExercises = [];
     selectedExercises.forEach((ex) => {

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { v1 as uuid } from "uuid";
+
 import classes from "./CurrentWokrout.module.scss";
 import Workout from "../../../components/Workout/Workout";
 import AddNewItemButton from "../../../components/UI/Buttons/AddNewItemButton/AddNewItemButton";
@@ -53,9 +55,12 @@ const CurrentWokrout = (props) => {
     const completedWokrout = {
       date: currentDate,
       exercises: listOfExercises,
+      id: uuid(),
     };
-    dispatch(updateWorkoutHistory(completedWokrout));
-    dispatch(fetchWorkoutHistory());
+    dispatch(updateWorkoutHistory(completedWokrout)).then(() =>
+      dispatch(fetchWorkoutHistory())
+    );
+    // ;
     dispatch(setSelectedExercisesActionCreator());
     history.push("/workouts");
   };

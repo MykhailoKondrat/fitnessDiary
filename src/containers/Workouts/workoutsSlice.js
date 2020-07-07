@@ -6,6 +6,7 @@ const workoutInit = {
   history: [],
   loading: false,
   error: null,
+  upToDate: false,
 };
 
 export const fetchWorkoutHistory = createAsyncThunk(
@@ -35,10 +36,12 @@ export const workoutSlice = createSlice({
       state.history = payload;
       state.loading = false;
       state.error = false;
+      state.upToDate = true;
     },
     [fetchWorkoutHistory.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = true;
+      state.upToDate = false;
     },
     [fetchWorkoutHistory.pending]: (state, { payload }) => {
       state.loading = true;
@@ -47,6 +50,7 @@ export const workoutSlice = createSlice({
     [updateWorkoutHistory.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.error = false;
+      state.upToDate = false;
     },
     [updateWorkoutHistory.rejected]: (state, action) => {
       state.loading = false;

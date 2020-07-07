@@ -9,6 +9,7 @@ import { fetchWorkoutHistory } from "./workoutsSlice";
 
 const Workouts = (props) => {
   const workoutHistory = useSelector((state) => state.workout.history);
+  const upToDate = useSelector((state) => state.workout.upToDate);
   let content = null;
   const dispatch = useDispatch();
   const history = useHistory();
@@ -17,9 +18,15 @@ const Workouts = (props) => {
   };
 
   useEffect(() => {
-    console.log("using FETCH Effect");
-    dispatch(fetchWorkoutHistory());
+    // to avoid re-fetching data if it was actually not changed and is up to date
+    const updateWorkoutHistory = () => {
+      if (!upToDate) {
+        return dispatch(fetchWorkoutHistory());
+      }
+    };
+    updateWorkoutHistory();
   }, []);
+
   if (workoutHistory.length !== 0) {
     content = (
       <>
