@@ -8,6 +8,7 @@ const FloatingConfirmButton = (props) => {
       type={props.type}
       onClick={props.click}
       className={classes.FloatingButton}
+      disabled={props.disable}
     >
       {props.children}
     </button>

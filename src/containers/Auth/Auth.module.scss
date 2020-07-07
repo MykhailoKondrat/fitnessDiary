@@ -1,0 +1,17 @@
+@import '../../app/_variables.module.scss';
+
+.wrapper{
+  background: $mainGradient;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .headline{
+    margin: 0 auto;
+  }
+  .button{
+    background: white;
+  }
+}

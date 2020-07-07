@@ -1,26 +1,30 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Workout from "../../components/Workout/Workout";
 import classes from "./Workouts.module.scss";
 import AddNewItemButton from "../../components/UI/Buttons/AddNewItemButton/AddNewItemButton";
 import { ReactComponent as Illustration } from "../../assets/icons/dumbells.svg";
+import { fetchWorkoutHistory } from "./workoutsSlice";
 
 const Workouts = (props) => {
   const workoutHistory = useSelector((state) => state.workout.history);
   // workoutHistory = null;
   let content = null;
-
+  const dispatch = useDispatch();
   const history = useHistory();
   const handleClick = () => {
     history.push("/add_exersices_to_workout");
   };
 
+  useEffect(() => {
+    dispatch(fetchWorkoutHistory());
+  }, []);
   if (workoutHistory.length !== 0) {
     content = (
       <>
         <div className={classes.buttonWrapper}>
-          <AddNewItemButton clicked={handleClick}>
+          <AddNewItemButton click={handleClick}>
             Start New Workout
           </AddNewItemButton>
         </div>
@@ -47,7 +51,7 @@ const Workouts = (props) => {
           <Illustration className={classes.illustration} />
         </div>
         <p>Start your first workout!</p>
-        <AddNewItemButton clicked={handleClick}>
+        <AddNewItemButton click={handleClick}>
           Start First Workout
         </AddNewItemButton>
       </div>

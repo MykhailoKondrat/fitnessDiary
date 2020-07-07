@@ -14,11 +14,19 @@
   @include defaultShadow;
   outline: none;
   cursor: pointer;
+  border-bottom: 3px solid transparent;
+
   &:first-child{
     border-radius: 0 8px 0 0;
   }
   &:last-child{
     border-radius: 8px 0 0 0;
+  }
+  &:hover{
+    border-bottom: 3px solid $secondaryColor;
+    fill: $secondaryColor;
+    stroke: none;
+
   }
   &.active{
     fill: $mainColor;

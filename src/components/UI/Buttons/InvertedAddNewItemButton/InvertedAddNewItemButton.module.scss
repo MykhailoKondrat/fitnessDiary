@@ -1,0 +1,52 @@
+@import '../../../../app/_variables.module.scss';
+.InvertedAddNewItemButton{
+  align:center;
+  width: 80%;
+  max-width: 400px;
+  margin: 16px auto;
+  height: 40px;
+  border:1px solid change-color($mainColor,$saturation:90,$lightness: 70);
+  border-radius: 80px;
+  font-weight: 700;
+  color: $mainColor;
+  background: white;
+  text-transform: uppercase;
+  outline: none;
+  @include defaultShadow;
+  &:hover{
+    background: change-color($mainColor,$saturation:90,$lightness: 70);
+    color: white;
+    box-shadow: none;
+  }
+  &:active{
+    background: $mainColor;
+    color: white;
+    box-shadow: none;
+
+  }
+}
+.InvertedOutlinedAddNewItemButton {
+  align:center;
+  width: 80%;
+  max-width: 400px;
+  margin: 16px auto;
+  height: 40px;
+  border:2px solid change-color($mainColor,$saturation:90,$lightness: 90);
+  border-radius: 80px;
+  font-weight: 700;
+  color: white;
+  background: none;
+  text-transform: uppercase;
+  outline: none;
+  &:hover{
+    background: white;
+    color: $mainColor;
+    border: none;
+  }
+  &:active{
+    background: change-color($mainColor,$saturation:90,$lightness: 90);
+    color: white;
+    border: none;
+
+  }
+}

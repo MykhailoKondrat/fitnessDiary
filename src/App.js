@@ -2,24 +2,27 @@ import React, { Fragment, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 import * as styles from "./App.module.scss";
+import Auth from "./containers/Auth/Auth";
 import Workouts from "./containers/Workouts/Workouts";
 import DietTracker from "./containers/DietTracker/DietTracker";
 import Layout from "./containers/hoc/Layout/Layout";
 import AddExercises from "./containers/Exercises/AddExercises/AddExercises";
-import { completeWorkoutActionCreator } from "./containers/Workouts/workoutsSlice";
 import {
   addExerciseActionCreator,
   removeExerciseActionCreator,
   addSetActionCreator,
 } from "./containers/Exercises/exercisesSlice";
 import CurrentWokrout from "./containers/Workouts/CurrentWorkout/CurrentWokrout";
+import LogIn from "./containers/Auth/LogIn/LogIn";
+import SignUp from "./containers/Auth/SignUp/SignUp";
 
 const App = (props) => {
   const dispatch = useDispatch();
-
-  return (
-    <>
-      <Switch>
+  const authState = useSelector((state) => state.auth);
+  let routes = null;
+  if (authState.logedIn) {
+    routes = (
+      <>
         <Route
           path="/workouts"
           render={(props) => (
@@ -38,33 +41,24 @@ const App = (props) => {
         />
         <Route
           path="/add_exersices_to_workout"
-          render={(props) => <AddExercises />}
+          render={() => <AddExercises />}
         />
-        <Route
-          path="/wokrout_in_progress"
-          render={(props) => <CurrentWokrout />}
-        />
+        <Route path="/wokrout_in_progress" render={() => <CurrentWokrout />} />
         <Redirect to="/workouts" />
-      </Switch>
-      {/* idk which option is best one - first looks too nested, second- too */}
-      {/* verbose */}
-      {/* -- TODO : add memoiztion to avoid re-rendering workouts on switch to food  tracker */}
+      </>
+    );
+  } else {
+    routes = (
+      <>
+        <Route path="/auth" render={() => <Auth />} />
+        <Route path="/log_in" render={() => <LogIn />} />
+        <Route path="/sign_up" render={() => <SignUp />} />
+        <Redirect to="/auth" />
+      </>
+    );
+  }
 
-      {/* <Switch> */}
-      {/*  <Layout path={["/workouts", "/diet"]}> */}
-      {/*    <Route path="/workouts" render={(props) => <Workouts {...props} />} /> */}
-      {/*    <Route path="/diet" render={(props) => <DietTracker {...props} />} /> */}
-      {/*  </Layout> */}
-      {/*  <Route path="/test" exact> */}
-      {/*    {test} */}
-      {/*  </Route> */}
-      {/*  <Route path="/test/test" exact> */}
-      {/*    <h1>test</h1> */}
-      {/*  </Route> */}
-      {/*  <Redirect to="/workouts" /> */}
-      {/* </Switch> */}
-    </>
-  );
+  return <Switch>{routes}</Switch>;
 };
 
 export default withRouter(App);

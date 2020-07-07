@@ -114,7 +114,12 @@ const AddExercises = (props) => {
             {ex.name}
           </ExerciseSelect>
         ))}
-        <FloatingConfirmButton type="submit">Continue</FloatingConfirmButton>
+        <FloatingConfirmButton
+          type="submit"
+          disable={localSelectedExercises.length === 0}
+        >
+          Continue
+        </FloatingConfirmButton>
       </form>
     </>
   );

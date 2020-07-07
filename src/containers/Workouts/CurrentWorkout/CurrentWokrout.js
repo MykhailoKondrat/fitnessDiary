@@ -80,7 +80,7 @@ const CurrentWokrout = (props) => {
         {` ${currentDate}`}
       </Toolbar>
       <div className={classes.content}>
-        <AddNewItemButton clicked={handleChangeWorkout}>
+        <AddNewItemButton click={handleChangeWorkout}>
           {listOfExercises.length > 0 ? "Change workout" : "Add exercises"}
         </AddNewItemButton>
         <Workout
