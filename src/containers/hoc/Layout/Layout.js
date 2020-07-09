@@ -2,12 +2,11 @@ import React, { useMemo } from "react";
 import classes from "./Layout.module.scss";
 import Navbar from "../../../components/Navigation/Navbar/Navbar";
 import Toolbar from "../../../components/Navigation/Toolbar/Toolbar";
-import ToolbarButton from "../../../components/UI/Buttons/ToolbarButton/ToolbarButton";
 
 const Layout = (props) => {
   return (
     <div className={classes.Wrapper}>
-      <Toolbar confirmIcon="Logout" declineIcon="GoBack">
+      <Toolbar confirmIcon="Logout">
         Welcome, Mykhailo Kondrat!
         {props.username}{" "}
       </Toolbar>

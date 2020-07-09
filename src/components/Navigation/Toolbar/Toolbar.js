@@ -5,7 +5,7 @@ import { ReactComponent as LogoutIcon } from "../../../assets/icons/003-sign-out
 import { ReactComponent as CheckIcon } from "../../../assets/icons/001-check.svg";
 import { ReactComponent as GoBackIcon } from "../../../assets/icons/002-chevron-pointing-to-the-left.svg";
 import { ReactComponent as MenuIcon } from "../../../assets/icons/004-three-small-square-shapes.svg";
-import { ReactComponent as DumbellIcon } from "../../../assets/icons/001-dumbbell.svg";
+import { ReactComponent as CloseIcon } from "../../../assets/icons/close.svg";
 
 const Toolbar = (props) => {
   // define right  icon based on passed props - confirmAction for right side and declineAction for left.
@@ -23,6 +23,8 @@ const Toolbar = (props) => {
         return (iconOutput = <GoBackIcon width="100%" height="32px" />);
       case "Menu":
         return (iconOutput = <MenuIcon width="100%" height="32px" />);
+      case "Close":
+        return (iconOutput = <CloseIcon width="100%" height="32px" />);
       default:
         return (iconOutput = null);
     }

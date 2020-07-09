@@ -1,26 +1,23 @@
-import { v1 as uuid } from "uuid";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchWorkoutHistory, workoutSlice } from "../Workouts/workoutsSlice";
 import axios from "../../axiosInstance";
 
 // list of available exercises
 // requires name, type(related body part), ?description,
 // Thats why we need TS :)
 
-const exercisesTypes = {
-  legs: "Legs",
-  arms: "Arms",
-  fullBody: "FullBody",
-  chest: "Chest",
-  back: "Back",
-  biceps: "Biceps",
-  triceps: "Triceps",
-};
+// const exercisesTypes = {
+//   legs: "Legs",
+//   arms: "Arms",
+//   fullBody: "FullBody",
+//   chest: "Chest",
+//   back: "Back",
+//   biceps: "Biceps",
+//   triceps: "Triceps",
+// };
 export const fetchAvailableExercises = createAsyncThunk(
   "exercises/fetchAvailableExercises",
   async () => {
-    const response = await axios.get("/exercise/availableExercises.json");
-    return response;
+    return await axios.get("/exercise/availableExercises.json");
   }
 );
 

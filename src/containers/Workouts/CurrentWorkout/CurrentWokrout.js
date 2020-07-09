@@ -1,33 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { v1 as uuid } from "uuid";
-
+// import { unwrapResult } from "@reduxjs/toolkit";
 import classes from "./CurrentWokrout.module.scss";
 import Workout from "../../../components/Workout/Workout";
 import AddNewItemButton from "../../../components/UI/Buttons/AddNewItemButton/AddNewItemButton";
 import Toolbar from "../../../components/Navigation/Toolbar/Toolbar";
 import FloatingConfirmButton from "../../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";
 import ExerciseModifySets from "../../../components/Exercise/ExerciseModifySets/ExerciseModifySets";
+import Modal from "../../../components/UI/Modal /Modal";
 import {
   addSetActionCreator,
   setSelectedExercisesActionCreator,
+  addExerciseActionCreator,
 } from "../../Exercises/exercisesSlice";
-import { fetchWorkoutHistory, updateWorkoutHistory } from "../workoutsSlice";
+import {
+  fetchWorkoutHistory,
+  updateWorkoutHistory,
+  completeWorkoutActionCreator,
+  closeWorkoutActionCreator,
+} from "../workoutsSlice";
 
 const CurrentWokrout = (props) => {
   const dispatch = useDispatch();
   const listOfExercises = useSelector(
-    (state) => state.exercise.selectedExercises,
-    shallowEqual
+    (state) => state.exercise.selectedExercises
   );
+
   const [editExerciseMode, setEditExerciseMode] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [completeWorkout, setcompleteWorkout] = useState(false);
 
   const history = useHistory();
-  const handleGoBack = () => {
-    history.goBack();
-  };
+
   // getting date
   const getCurrentDate = () => {
     let date = new Date().toDateString();
@@ -37,9 +44,55 @@ const CurrentWokrout = (props) => {
   };
 
   const currentDate = getCurrentDate();
+
   const handleEditExercise = (name, id) => {
     setSelectedExercise(name);
     setEditExerciseMode(true);
+  };
+
+  const handleCompleteWorkout = () => {
+    if (listOfExercises.length === 0) {
+      setcompleteWorkout(!completeWorkout);
+      history.push("/workouts");
+    } else if (completeWorkout) {
+      const completedWokrout = {
+        date: currentDate,
+        exercises: listOfExercises,
+        id: uuid(),
+      };
+      // unwrapResult - some kind of strange shit is going on here
+      dispatch(updateWorkoutHistory(completedWokrout))
+        // .then(unwrapResult)
+        // unwrap results prevent res from working
+        // with unwrap results - error is fine but res part not working
+        // idk wtf
+        .then((res) => {
+          dispatch(completeWorkoutActionCreator(res.meta.arg));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      dispatch(setSelectedExercisesActionCreator());
+      history.push("/workouts");
+    }
+  };
+  const checkEmptyExercises = () => {
+    let hasEmptyExercises = false;
+    hasEmptyExercises = listOfExercises.some(
+      (exercise) => exercise.reps.length === 0
+    );
+    return hasEmptyExercises
+      ? setShowModal(true)
+      : setcompleteWorkout(!completeWorkout);
+  };
+
+  const handleContinueAndRemoveEmpty = () => {
+    // handleCleanUpEmptyExercises();
+    const result = listOfExercises.filter(
+      (exercise) => exercise.reps.length !== 0
+    );
+    dispatch(addExerciseActionCreator(result));
+    return setcompleteWorkout(true);
   };
 
   const handleCloseAndUpdate = (sets) => {
@@ -51,21 +104,33 @@ const CurrentWokrout = (props) => {
     history.push("/add_exersices_to_workout");
   };
 
-  const handleCompleteWorkout = () => {
-    const completedWokrout = {
-      date: currentDate,
-      exercises: listOfExercises,
-      id: uuid(),
-    };
-    dispatch(updateWorkoutHistory(completedWokrout)).then(() =>
-      dispatch(fetchWorkoutHistory())
-    );
-    // ;
+  const handleExitWorkout = () => {
+    dispatch(closeWorkoutActionCreator());
     dispatch(setSelectedExercisesActionCreator());
+    setSelectedExercise(null);
     history.push("/workouts");
   };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  useEffect(() => {
+    handleCompleteWorkout();
+  }, [completeWorkout]);
+
   return (
     <>
+      {showModal && (
+        <Modal
+          headline="Empty exercises spotted!"
+          info="All exercises should contain at least one set. Exercises without sets will not be added to Diary"
+          cancelAction={handleCloseModal}
+          cancelActionLabel="Cancel"
+          confirmAction={handleContinueAndRemoveEmpty}
+          cofirmActionLabel="Continue"
+        />
+      )}
       {editExerciseMode && (
         <ExerciseModifySets
           selectedExerciseName={selectedExercise}
@@ -77,7 +142,7 @@ const CurrentWokrout = (props) => {
           // pass reps and weight here
         />
       )}
-      <Toolbar>
+      <Toolbar confirmIcon="Close" confirmAction={handleExitWorkout}>
         Current Workout,
         {` ${currentDate}`}
       </Toolbar>
@@ -91,7 +156,7 @@ const CurrentWokrout = (props) => {
           date="Tap on exercise to add Sets"
           exercises={listOfExercises}
         />
-        <FloatingConfirmButton click={handleCompleteWorkout}>
+        <FloatingConfirmButton click={checkEmptyExercises}>
           Complete Workout
         </FloatingConfirmButton>
       </div>

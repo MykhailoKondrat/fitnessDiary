@@ -37,9 +37,6 @@ const Auth = (props) => {
         Log In
       </InvertedAddNewItemButton>
       <InvertedAddNewItemButton outlined>Sign Up</InvertedAddNewItemButton>
-      <InvertedAddNewItemButton click={testAsyncHandler}>
-        Test asyncThunk
-      </InvertedAddNewItemButton>
     </div>
   );
 };

@@ -20,7 +20,11 @@ export const fetchWorkoutHistory = createAsyncThunk(
 export const updateWorkoutHistory = createAsyncThunk(
   "workout/updateWorkoutHistory",
   async (newWorkout) => {
-    await axios.post("/workout/history.json", { ...newWorkout });
+    try {
+      await axios.post("/workout/history.json", { ...newWorkout });
+    } catch (e) {
+      return e;
+    }
   }
 );
 export const workoutSlice = createSlice({
@@ -29,6 +33,11 @@ export const workoutSlice = createSlice({
   reducers: {
     workoutCompleted: (state, { payload }) => {
       state.history.push(payload);
+    },
+    wokroutClosed: (state, { payload }) => {
+      state.loading = false;
+      state.error = null;
+      state.upToDate = false;
     },
   },
   extraReducers: {
@@ -55,7 +64,6 @@ export const workoutSlice = createSlice({
     [updateWorkoutHistory.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
-      console.log(action);
     },
     [updateWorkoutHistory.pending]: (state, { payload }) => {
       state.loading = true;
@@ -65,5 +73,6 @@ export const workoutSlice = createSlice({
 });
 export const {
   workoutCompleted: completeWorkoutActionCreator,
+  wokroutClosed: closeWorkoutActionCreator,
 } = workoutSlice.actions;
 export default workoutSlice.reducer;
