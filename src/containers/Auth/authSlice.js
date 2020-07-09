@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../axiosInstance";
+import axios from "axios";
 
 const authInit = {
   logedIn: false,
@@ -10,11 +10,19 @@ const authInit = {
   async: false,
 };
 
-export const testAsync = createAsyncThunk("auth/testAsync", async () => {
-  const response = await axios.get("/availableExercies.json");
-  return response;
-});
-
+export const signUp = createAsyncThunk(
+  "auth/signUp",
+  async (authCredential) => {
+    const url =
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA_f43NyLR3IrhkHvPGsbiDr0JDpLYD3O8";
+    const authData = {
+      email: authCredential.email,
+      password: authCredential.password,
+      returnSecureToken: true,
+    };
+    return await axios.post(url, authData);
+  }
+);
 export const authSlice = createSlice({
   name: "auth",
   initialState: authInit,
@@ -42,8 +50,12 @@ export const authSlice = createSlice({
       state.loadign = false;
     },
     signUpSuccess: (state, action) => {
+      state.logedIn = true;
+      state.userId = 1;
+      state.token = 12345;
       state.error = null;
       state.loadign = false;
+
       return true;
     },
     logout: (state, action) => {
@@ -55,10 +67,28 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: {
-    [testAsync.fulfilled]: (state, action) => {
-      console.log(action);
+    [signUp.fulfilled]: (state, action) => {
+      state.logedIn = true;
+      state.userId = 1;
+      state.token = 12345;
+      state.error = null;
+      state.loadign = false;
     },
-    [testAsync.rejected]: (state, action) => {},
+    [signUp.rejected]: (state, action) => {
+      console.log(action);
+      state.logedIn = true;
+      state.userId = 1;
+      state.token = 12345;
+      state.error = action.error.message;
+      state.loadign = false;
+    },
+    [signUp.pending]: (state, action) => {
+      state.logedIn = true;
+      state.userId = 1;
+      state.token = 12345;
+      state.error = null;
+      state.loadign = false;
+    },
   },
 });
 

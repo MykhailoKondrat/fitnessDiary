@@ -11,7 +11,6 @@ import {
   signUpFailActionCreator,
   signUpSuccessActionCreator,
   logoutActionCreator,
-  testAsync,
 } from "./authSlice";
 
 const Auth = (props) => {
@@ -19,24 +18,25 @@ const Auth = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleLogIn = () => {
+  const goToLogIn = () => {
     history.push("/log_in");
-    dispatch(logInSuccessActionCreator());
+  };
+  const goToSignUp = () => {
+    history.push("/sign_up");
   };
   const testAsyncHandler = () => {
     // dispatch(logInStartActionCreator());
-    dispatch(testAsync())
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
   };
   return (
     <div className={classes.wrapper}>
       <h2 className={classes.headline}>Welcome to FitnessDiaryApp!</h2>
       <p>Let your path to healthy life begins</p>
-      <InvertedAddNewItemButton click={handleLogIn} className={classes.button}>
+      <InvertedAddNewItemButton click={goToLogIn} className={classes.button}>
         Log In
       </InvertedAddNewItemButton>
-      <InvertedAddNewItemButton outlined>Sign Up</InvertedAddNewItemButton>
+      <InvertedAddNewItemButton outlined click={goToSignUp}>
+        Sign Up
+      </InvertedAddNewItemButton>
     </div>
   );
 };
