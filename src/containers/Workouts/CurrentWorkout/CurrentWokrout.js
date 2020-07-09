@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { v1 as uuid } from "uuid";
-// import { unwrapResult } from "@reduxjs/toolkit";
+import { unwrapResult } from "@reduxjs/toolkit";
 import classes from "./CurrentWokrout.module.scss";
 import Workout from "../../../components/Workout/Workout";
 import AddNewItemButton from "../../../components/UI/Buttons/AddNewItemButton/AddNewItemButton";
@@ -16,7 +16,6 @@ import {
   addExerciseActionCreator,
 } from "../../Exercises/exercisesSlice";
 import {
-  fetchWorkoutHistory,
   updateWorkoutHistory,
   completeWorkoutActionCreator,
   closeWorkoutActionCreator,
@@ -61,16 +60,21 @@ const CurrentWokrout = (props) => {
         id: uuid(),
       };
       // unwrapResult - some kind of strange shit is going on here
+      // unwrapREsults is not working with response from POST
+      // maybe it worth to refactor this code with axios interceptors
+
       dispatch(updateWorkoutHistory(completedWokrout))
-        // .then(unwrapResult)
-        // unwrap results prevent res from working
-        // with unwrap results - error is fine but res part not working
-        // idk wtf
         .then((res) => {
+          // if res obj contains error<passed from try/catch block>
+          // throw new error
+          if (res.error) {
+            console.log(res.error);
+            throw new Error(res.error.message);
+          }
           dispatch(completeWorkoutActionCreator(res.meta.arg));
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log("POST error!: ", error);
         });
       dispatch(setSelectedExercisesActionCreator());
       history.push("/workouts");
@@ -117,7 +121,7 @@ const CurrentWokrout = (props) => {
 
   useEffect(() => {
     handleCompleteWorkout();
-  }, [completeWorkout]);
+  }, [completeWorkout, handleCompleteWorkout]);
 
   return (
     <>

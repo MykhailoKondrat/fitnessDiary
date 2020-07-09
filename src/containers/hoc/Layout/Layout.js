@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import classes from "./Layout.module.scss";
 import Navbar from "../../../components/Navigation/Navbar/Navbar";
 import Toolbar from "../../../components/Navigation/Toolbar/Toolbar";

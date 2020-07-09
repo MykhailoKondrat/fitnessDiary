@@ -1,24 +1,21 @@
-import React, { Fragment, Suspense } from "react";
-import { useSelector, useDispatch, Provider } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Route, withRouter, Switch, Redirect } from "react-router-dom";
-import * as styles from "./App.module.scss";
 import Auth from "./containers/Auth/Auth";
 import Workouts from "./containers/Workouts/Workouts";
 import DietTracker from "./containers/DietTracker/DietTracker";
 import Layout from "./containers/hoc/Layout/Layout";
 import AddExercises from "./containers/Exercises/AddExercises/AddExercises";
-import {
-  addExerciseActionCreator,
-  removeExerciseActionCreator,
-  addSetActionCreator,
-} from "./containers/Exercises/exercisesSlice";
+// import {
+//   addExerciseActionCreator,
+//   removeExerciseActionCreator,
+//   addSetActionCreator,
+// } from "./containers/Exercises/exercisesSlice";
 import CurrentWokrout from "./containers/Workouts/CurrentWorkout/CurrentWokrout";
 import LogIn from "./containers/Auth/LogIn/LogIn";
 import SignUp from "./containers/Auth/SignUp/SignUp";
-import onLoading from "./containers/hoc/onLoading/OnLoading";
 
 const App = (props) => {
-  const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   let routes = null;
   if (authState.logedIn) {

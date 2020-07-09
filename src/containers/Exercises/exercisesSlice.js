@@ -36,9 +36,10 @@ export const exercisesSlice = createSlice({
       state.selectedExercises = payload;
     },
     removeExercise: (state, { payload }) => {
-      const indexToRemove = state.selectedExercises.find(
-        (exercise) => exercise.id === exercise.id
-      );
+      const indexToRemove = state.selectedExercises
+        .find
+        // (exercise) => exercise.id === exercise.id
+        ();
       if (indexToRemove) {
         state.selectedExercises.splice(indexToRemove, 1);
       }

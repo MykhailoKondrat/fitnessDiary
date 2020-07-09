@@ -1,4 +1,3 @@
-import { v1 as uuid } from "uuid";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axiosInstance";
 
@@ -8,7 +7,6 @@ const workoutInit = {
   error: null,
   upToDate: false,
 };
-
 export const fetchWorkoutHistory = createAsyncThunk(
   "workout/fetchWorkoutHistory",
   async () => {
@@ -23,7 +21,8 @@ export const updateWorkoutHistory = createAsyncThunk(
     try {
       await axios.post("/workout/history.json", { ...newWorkout });
     } catch (e) {
-      return e;
+      console.log("error works");
+      throw new Error(e);
     }
   }
 );

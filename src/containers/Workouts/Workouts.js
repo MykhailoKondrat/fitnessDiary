@@ -6,7 +6,6 @@ import classes from "./Workouts.module.scss";
 import AddNewItemButton from "../../components/UI/Buttons/AddNewItemButton/AddNewItemButton";
 import { ReactComponent as Illustration } from "../../assets/icons/dumbells.svg";
 import { fetchWorkoutHistory } from "./workoutsSlice";
-import Modal from "../../components/UI/Modal /Modal";
 
 const Workouts = (props) => {
   const workoutHistory = useSelector((state) => state.workout.history);

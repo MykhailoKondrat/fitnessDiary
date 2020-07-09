@@ -1,16 +1,12 @@
 import React from "react";
 import classes from "./ExerciseSelect.module.scss";
 import { ReactComponent as CheckIcon } from "../../../assets/icons/001-check.svg";
-import AddNewItemButton from "../../UI/Buttons/AddNewItemButton/AddNewItemButton";
 
 const ExerciseSelect = (props) => {
   // const handleOnChange = (e) => {
   //   console.log(e.target.checked);
   // };
 
-  const onChangeHandlerTest = (e) => {
-    console.log(e.target.id, "was changed");
-  };
   return (
     <>
       <input
