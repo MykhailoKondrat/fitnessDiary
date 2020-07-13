@@ -26,7 +26,7 @@ const CurrentWokrout = (props) => {
   const listOfExercises = useSelector(
     (state) => state.exercise.selectedExercises
   );
-
+  const userId = useSelector((state) => state.auth.userId);
   const [editExerciseMode, setEditExerciseMode] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -58,6 +58,7 @@ const CurrentWokrout = (props) => {
         date: currentDate,
         exercises: listOfExercises,
         id: uuid(),
+        userId,
       };
       // unwrapResult - some kind of strange shit is going on here
       // unwrapREsults is not working with response from POST
