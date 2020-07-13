@@ -8,22 +8,31 @@ const authInit = {
   refreshToken: null,
   error: null,
   loading: false,
-  redirect: "/auth",
 };
 
 export const signUp = createAsyncThunk(
   "auth/signUp",
-  async (authCredential) => {
+  async (authCredentials) => {
     const url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA_f43NyLR3IrhkHvPGsbiDr0JDpLYD3O8";
     const authData = {
-      email: authCredential.email,
-      password: authCredential.password,
+      email: authCredentials.email,
+      password: authCredentials.password,
       returnSecureToken: true,
     };
     return await axios.post(url, authData);
   }
 );
+export const logIn = createAsyncThunk("auth/logIn", async (authCredentials) => {
+  const url =
+    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA_f43NyLR3IrhkHvPGsbiDr0JDpLYD3O8";
+  const authData = {
+    email: authCredentials.email,
+    password: authCredentials.password,
+    returnSecureToken: true,
+  };
+  return await axios.post(url, authData);
+});
 export const authSlice = createSlice({
   name: "auth",
   initialState: authInit,
@@ -69,8 +78,31 @@ export const authSlice = createSlice({
     },
     [signUp.pending]: (state, action) => {
       state.logedIn = false;
-      state.userId = 1;
-      state.token = 12345;
+      state.userId = null;
+      state.token = null;
+      state.error = null;
+      state.loading = true;
+    },
+
+    [logIn.fulfilled]: (state, { payload }) => {
+      state.logedIn = true;
+      state.userId = payload.data.localId;
+      state.token = payload.data.idToken;
+      state.refreshToken = payload.data.refreshToken;
+      state.error = null;
+      state.loading = false;
+    },
+    [logIn.rejected]: (state, action) => {
+      state.logedIn = false;
+      state.userId = null;
+      state.token = null;
+      state.error = action.error.message;
+      state.loading = false;
+    },
+    [logIn.pending]: (state, action) => {
+      state.logedIn = false;
+      state.userId = null;
+      state.token = null;
       state.error = null;
       state.loading = true;
     },

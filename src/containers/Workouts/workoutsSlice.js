@@ -9,8 +9,8 @@ const workoutInit = {
 };
 export const fetchWorkoutHistory = createAsyncThunk(
   "workout/fetchWorkoutHistory",
-  async () => {
-    const response = await axios.get("/workout/history.json");
+  async (queryParams) => {
+    const response = await axios.get(`/workout/history.json${queryParams}`);
     const listOfWokrouts = Object.values(response.data);
     return listOfWokrouts;
   }
