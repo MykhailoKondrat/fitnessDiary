@@ -26,7 +26,8 @@ const CurrentWokrout = (props) => {
   const listOfExercises = useSelector(
     (state) => state.exercise.selectedExercises
   );
-  const userId = useSelector((state) => state.auth.userId);
+  const userData = useSelector((state) => state.auth);
+
   const [editExerciseMode, setEditExerciseMode] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +45,7 @@ const CurrentWokrout = (props) => {
 
   const currentDate = getCurrentDate();
 
-  const handleEditExercise = (name, id) => {
+  const handleEditExercise = (name) => {
     setSelectedExercise(name);
     setEditExerciseMode(true);
   };
@@ -58,12 +59,12 @@ const CurrentWokrout = (props) => {
         date: currentDate,
         exercises: listOfExercises,
         id: uuid(),
-        userId,
+        userId: userData.userId,
       };
       // unwrapResult - some kind of strange shit is going on here
       // unwrapREsults is not working with response from POST
       // maybe it worth to refactor this code with axios interceptors
-
+      const token = `${userData.token}`;
       dispatch(updateWorkoutHistory(completedWokrout))
         .then((res) => {
           // if res obj contains error<passed from try/catch block>

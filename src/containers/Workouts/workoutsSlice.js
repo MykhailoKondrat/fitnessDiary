@@ -10,7 +10,9 @@ const workoutInit = {
 export const fetchWorkoutHistory = createAsyncThunk(
   "workout/fetchWorkoutHistory",
   async (queryParams) => {
-    const response = await axios.get(`/workout/history.json${queryParams}`);
+    const response = await axios.get(
+      `/workout/history.json?auth=${queryParams}`
+    );
     const listOfWokrouts = Object.values(response.data);
     return listOfWokrouts;
   }
@@ -19,7 +21,9 @@ export const updateWorkoutHistory = createAsyncThunk(
   "workout/updateWorkoutHistory",
   async (newWorkout) => {
     try {
-      await axios.post("/workout/history.json", { ...newWorkout });
+      await axios.post(`/workout/history.json`, {
+        ...newWorkout,
+      });
     } catch (e) {
       console.log("error works");
       throw new Error(e);

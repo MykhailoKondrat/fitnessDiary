@@ -21,7 +21,7 @@ const Workouts = (props) => {
   useEffect(() => {
     // to avoid re-fetching data if it was actually not changed and is up to date
     console.log(userData);
-    const queryParams = `?auth=${userData.token}&orderBy="userId"&equalTo="${userData.userId}"`;
+    const queryParams = `${userData.token}&orderBy="userId"&equalTo="${userData.userId}"`;
     const updateWorkoutHistory = () => {
       if (!upToDate) {
         return dispatch(fetchWorkoutHistory(queryParams));
