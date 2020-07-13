@@ -17,9 +17,11 @@ const Modal = (props) => {
           <h2 className={classes.headline}>{props.headline}</h2>
           <p className={classes.info}>{props.info}</p>
           <div className={classes.actionButtonsWrapper}>
-            <AddNewItemButton click={props.cancelAction} buttonStyle="nested">
-              {props.cancelActionLabel}
-            </AddNewItemButton>
+            {props.cancelActionLabel && (
+              <AddNewItemButton click={props.cancelAction} buttonStyle="nested">
+                {props.cancelActionLabel}
+              </AddNewItemButton>
+            )}
             <AddNewItemButton click={props.confirmAction} buttonStyle="nested">
               {props.cofirmActionLabel}
             </AddNewItemButton>

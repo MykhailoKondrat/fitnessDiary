@@ -1,15 +1,30 @@
 import React from "react";
 // import classes from './OnLoading.module.css';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import Modal from "../../../components/UI/Modal /Modal";
+import { logoutActionCreator } from "../../Auth/authSlice";
 
 const OnLoading = (props) => {
-  const loading = useSelector((state) => state.workout.loading);
-  const error = useSelector((state) => state.workout.error);
+  const dispatch = useDispatch();
+
+  const loadingWorkout = useSelector((state) => state.workout.loading);
+  const loadingAuth = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.error);
+  const handleCloseErrorModal = () => {
+    dispatch(logoutActionCreator());
+  };
   return (
     <>
-      {loading && <Spinner />}
-      {/* {//error && add error modal } */}
+      {(loadingWorkout || loadingAuth) && <Spinner />}
+      {error && (
+        <Modal
+          headline="Something Went Wrong!"
+          info={error}
+          confirmAction={handleCloseErrorModal}
+          cofirmActionLabel="Okay"
+        />
+      )}
       {props.children}
     </>
   );

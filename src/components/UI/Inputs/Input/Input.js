@@ -2,7 +2,10 @@ import React from "react";
 import classes from "./Input.module.scss";
 
 const Input = (props) => {
-  const inputClasses = [classes.Input];
+  let inputClasses = [classes.Input];
+  if (!props.valid && props.touched) {
+    inputClasses = [classes.Input, classes.Invalid];
+  }
   const inputElement = (
     <>
       <input
@@ -12,13 +15,14 @@ const Input = (props) => {
         onChange={props.change}
         value={props.value}
         placeholder={props.placeholder}
+        onBlur={props.blur}
       />
     </>
   );
   let validationError = null;
-  if (props.invalid && props.touched) {
+  if (!props.valid && props.touched) {
     validationError = (
-      <p className={classes.errorMessage}>Please enter a valid value!</p>
+      <p className={classes.errorMessage}>{props.errorMessage}</p>
     );
   }
   return (
