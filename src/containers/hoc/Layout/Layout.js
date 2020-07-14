@@ -20,7 +20,9 @@ const Layout = (props) => {
   return (
     <div className={classes.Wrapper}>
       <Toolbar confirmIcon="Logout" confirmAction={handleLogOut}>
-        Welcome, Mykhailo Kondrat!
+        {history.location.pathname.includes("workouts")
+          ? "Workout Diary"
+          : "Diet Tracker"}
         {props.username}{" "}
       </Toolbar>
       <main className={classes.Content}>{props.children}</main>

@@ -61,19 +61,13 @@ const CurrentWokrout = (props) => {
         id: uuid(),
         userId: userData.userId,
       };
-      // unwrapResult - some kind of strange shit is going on here
-      // unwrapREsults is not working with response from POST
-      // maybe it worth to refactor this code with axios interceptors
+
       const token = `${userData.token}`;
-      dispatch(updateWorkoutHistory(completedWokrout))
+      dispatch(updateWorkoutHistory(completedWokrout, token))
+        .then(unwrapResult)
         .then((res) => {
-          // if res obj contains error<passed from try/catch block>
-          // throw new error
-          if (res.error) {
-            console.log(res.error);
-            throw new Error(res.error.message);
-          }
-          dispatch(completeWorkoutActionCreator(res.meta.arg));
+          console.log(res);
+          dispatch(completeWorkoutActionCreator(completedWokrout));
         })
         .catch((error) => {
           console.log("POST error!: ", error);

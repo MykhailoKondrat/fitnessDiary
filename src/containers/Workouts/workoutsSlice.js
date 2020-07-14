@@ -20,14 +20,10 @@ export const fetchWorkoutHistory = createAsyncThunk(
 export const updateWorkoutHistory = createAsyncThunk(
   "workout/updateWorkoutHistory",
   async (newWorkout) => {
-    try {
-      await axios.post(`/workout/history.json`, {
-        ...newWorkout,
-      });
-    } catch (e) {
-      console.log("error works");
-      throw new Error(e);
-    }
+    const response = await axios.post(`/workout/history.json`, {
+      ...newWorkout,
+    });
+    return response;
   }
 );
 export const workoutSlice = createSlice({
@@ -59,6 +55,7 @@ export const workoutSlice = createSlice({
       state.loading = true;
       state.error = false;
     },
+
     [updateWorkoutHistory.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.error = false;
