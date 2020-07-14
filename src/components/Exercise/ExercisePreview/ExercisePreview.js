@@ -6,8 +6,10 @@ const ExercisePreview = (props) => {
   // total weight lifted during exrecise
   const totalWeight =
     props.weight.length !== 0
-      ? props.weight.reduce((acc, curr) => acc + curr) *
-        props.reps.reduce((acc, curr) => acc + curr)
+      ? props.weight.reduce(
+          (acc, curr, index) => acc + curr * props.reps[index],
+          0
+        )
       : null;
 
   return (
