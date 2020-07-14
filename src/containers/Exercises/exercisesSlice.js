@@ -54,6 +54,10 @@ export const exercisesSlice = createSlice({
         }
       });
     },
+    // this action can be used to:
+    // 1.by default - clear list of selected exercices.
+    // 2.in future - set selected execrcises to some pre-defined value
+
     setSelectedExercises: (state, { paylaod }) => {
       state.selectedExercises = [];
     },
