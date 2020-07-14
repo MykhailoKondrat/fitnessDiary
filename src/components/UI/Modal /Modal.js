@@ -4,14 +4,12 @@ import AddNewItemButton from "../Buttons/AddNewItemButton/AddNewItemButton";
 import Backdrop from "../Backdrop/Backdrop";
 
 const Modal = (props) => {
-  const [visibility, setVisibility] = useState();
-
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
   return (
-    <div className={classes.modal} hidden={visibility}>
+    <div className={classes.modal}>
       <div className={classes.modalWrapper}>
         <div className={classes.modalBody}>
           <h2 className={classes.headline}>{props.headline}</h2>
@@ -28,7 +26,7 @@ const Modal = (props) => {
           </div>
         </div>
       </div>
-      <Backdrop show click={() => setVisibility(!visibility)} />
+      <Backdrop show click={props.cancelAction} />
     </div>
   );
 };

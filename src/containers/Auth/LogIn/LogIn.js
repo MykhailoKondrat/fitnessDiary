@@ -99,14 +99,14 @@ const LogIn = (props) => {
         email: formState.email.value,
         password: formState.password.value,
       })
-    )
-      .then(unwrapResult)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    );
+    // .then(unwrapResult)
+    // .then((res) => {
+    //   console.log(res);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   };
   return (
     <div className={classes.wrapper}>
