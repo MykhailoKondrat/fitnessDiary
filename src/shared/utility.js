@@ -37,3 +37,32 @@ export const updateObject = (state, updates) => {
     ...updates,
   };
 };
+
+export const saveUserDataToLocalStorage = (
+  userId,
+  token,
+  refreshToken,
+  expiresIn
+) => {
+  const expriationDate = new Date(new Date().getTime() + expiresIn * 1000);
+  console.log(expriationDate);
+  console.log(userId);
+  localStorage.setItem("localId", userId);
+  localStorage.setItem("token", token);
+  localStorage.setItem("refreshToken", refreshToken);
+  localStorage.setItem("expirationDate", expriationDate);
+};
+
+export const clearLocalStorage = () => {
+  localStorage.removeItem("localId");
+  localStorage.removeItem("token");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("expirationDate");
+};
+
+export const getUserDataFromStorage = () => ({
+  localId: localStorage.getItem("localId"),
+  idToken: localStorage.getItem("token"),
+  refreshToken: localStorage.getItem("refreshToken"),
+  expiresIn: 3600,
+});

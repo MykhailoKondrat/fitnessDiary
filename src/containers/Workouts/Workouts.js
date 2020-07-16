@@ -14,20 +14,21 @@ const Workouts = (props) => {
   let content = null;
   const dispatch = useDispatch();
   const history = useHistory();
+
   const handleClick = () => {
     history.push("/add_exersices_to_workout");
   };
-
+  const updateWorkoutHistory = () => {
+    const queryParams = `${userData.token}&orderBy="userId"&equalTo="${userData.userId}"`;
+    if (!upToDate) {
+      return dispatch(fetchWorkoutHistory(queryParams));
+    }
+  };
   useEffect(() => {
     // to avoid re-fetching data if it was actually not changed and is up to date
-    const queryParams = `${userData.token}&orderBy="userId"&equalTo="${userData.userId}"`;
-    const updateWorkoutHistory = () => {
-      if (!upToDate) {
-        return dispatch(fetchWorkoutHistory(queryParams));
-      }
-    };
+
     updateWorkoutHistory();
-  }, []);
+  }, [workoutHistory]);
 
   if (workoutHistory.length !== 0) {
     content = (

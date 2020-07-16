@@ -6,6 +6,7 @@ const authInit = {
   userId: null,
   token: null,
   refreshToken: null,
+  expiresIn: null,
   error: null,
   loading: false,
 };
@@ -31,32 +32,33 @@ export const logIn = createAsyncThunk("auth/logIn", async (authCredentials) => {
     password: authCredentials.password,
     returnSecureToken: true,
   };
-  return await axios.post(url, authData);
+  const response = await axios.post(url, authData);
+  return response;
 });
+export const updateToken = createAsyncThunk(
+  "auth/exchangeToken",
+  async (refreshToken) => {
+    const url =
+      "https://securetoken.googleapis.com/v1/token?key=AIzaSyA_f43NyLR3IrhkHvPGsbiDr0JDpLYD3O8";
+    const data = {
+      grant_type: "refresh_token",
+      refresh_token: refreshToken,
+    };
+    console.log(data);
+    const response = await axios.post(url, data);
+    return response;
+  }
+);
 export const authSlice = createSlice({
   name: "auth",
   initialState: authInit,
   reducers: {
-    logInStart: (state, action) => {
-      state.loadign = true;
-    },
-    logInFail: (state, action) => {
-      state.logedIn = false;
-      state.error = "error";
-      state.loadign = false;
-    },
-    logInSuccess: (state, { payload }) => {
-      state.logedIn = true;
-      state.userId = 1;
-      state.token = 12345;
-      state.error = null;
-      state.loadign = false;
-    },
     logout: (state, action) => {
       state.logedIn = false;
       state.userId = null;
       state.token = null;
-      state.error = null;
+      state.refreshToken = null;
+      state.expiresIn = null;
       state.loading = false;
     },
   },
@@ -76,19 +78,19 @@ export const authSlice = createSlice({
       state.error = action.error.message;
       state.loading = false;
     },
-    [signUp.pending]: (state, action) => {
+    [signUp.pending]: (state) => {
       state.logedIn = false;
       state.userId = null;
       state.token = null;
       state.error = null;
       state.loading = true;
     },
-
     [logIn.fulfilled]: (state, { payload }) => {
       state.logedIn = true;
       state.userId = payload.data.localId;
       state.token = payload.data.idToken;
       state.refreshToken = payload.data.refreshToken;
+      state.expiresIn = payload.data.expiresIn;
       state.error = null;
       state.loading = false;
     },
@@ -109,14 +111,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const {
-  logInStart: logInStartActionCreator,
-  logInFail: logInFailActionCreator,
-  logInSuccess: logInSuccessActionCreator,
-  signUpStart: signUpStartActionCreator,
-  signUpFail: signUpFailActionCreator,
-  signUpSuccess: signUpSuccessActionCreator,
-  logout: logoutActionCreator,
-} = authSlice.actions;
+export const { logout: logoutActionCreator } = authSlice.actions;
 
 export default authSlice.reducer;

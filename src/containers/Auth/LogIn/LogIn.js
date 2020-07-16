@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { logIn, signUp } from "../authSlice";
+import { logIn } from "../authSlice";
 import classes from "./LogIn.module.scss";
 import Input from "../../../components/UI/Inputs/Input/Input";
 import FloatingConfirmButton from "../../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";
-import { checkValidity, updateObject } from "../../../shared/utility";
+import {
+  checkValidity,
+  updateObject,
+  saveUserDataToLocalStorage,
+} from "../../../shared/utility";
 
 const LogIn = (props) => {
   const formConfig = {
@@ -99,14 +103,19 @@ const LogIn = (props) => {
         email: formState.email.value,
         password: formState.password.value,
       })
-    );
-    // .then(unwrapResult)
-    // .then((res) => {
-    //   console.log(res);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
+    )
+      .then(unwrapResult)
+      .then((res) => {
+        saveUserDataToLocalStorage(
+          res.data.localId,
+          res.data.idToken,
+          res.data.refreshToken,
+          res.data.expiresIn
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className={classes.wrapper}>

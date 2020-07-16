@@ -61,7 +61,6 @@ const CurrentWokrout = (props) => {
         id: uuid(),
         userId: userData.userId,
       };
-
       const token = `${userData.token}`;
       dispatch(updateWorkoutHistory(completedWokrout, token))
         .then(unwrapResult)

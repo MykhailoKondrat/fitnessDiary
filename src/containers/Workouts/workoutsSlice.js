@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axiosInstance";
+import { logoutActionCreator } from "../Auth/authSlice";
 
 const workoutInit = {
   history: [],
@@ -68,6 +69,12 @@ export const workoutSlice = createSlice({
     [updateWorkoutHistory.pending]: (state, { payload }) => {
       state.loading = true;
       state.error = false;
+    },
+    [logoutActionCreator]: (state, action) => {
+      state.history = [];
+      state.loading = false;
+      state.error = false;
+      state.upToDate = false;
     },
   },
 });

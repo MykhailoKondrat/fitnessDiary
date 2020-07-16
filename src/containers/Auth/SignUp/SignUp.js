@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 import classes from "./SignUp.module.scss";
 import Input from "../../../components/UI/Inputs/Input/Input";
 import FloatingConfirmButton from "../../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";
@@ -44,7 +43,6 @@ const SignUp = (props) => {
 
   const [formState, setFormState] = useState(formConfig);
   const [enableSignup, setEnableSignup] = useState(false);
-  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {

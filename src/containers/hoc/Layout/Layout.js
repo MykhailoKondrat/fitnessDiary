@@ -7,12 +7,14 @@ import Navbar from "../../../components/Navigation/Navbar/Navbar";
 import Toolbar from "../../../components/Navigation/Toolbar/Toolbar";
 import { logoutActionCreator } from "../../Auth/authSlice";
 import { setSelectedExercisesActionCreator } from "../../Exercises/exercisesSlice";
+import { clearLocalStorage } from "../../../shared/utility";
 
 const Layout = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
+    clearLocalStorage();
     dispatch(setSelectedExercisesActionCreator());
     dispatch(logoutActionCreator());
     history.push("/auth");
