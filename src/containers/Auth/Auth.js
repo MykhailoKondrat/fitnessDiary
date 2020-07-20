@@ -1,14 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import classes from "./Auth.module.scss";
 import InvertedAddNewItemButton from "../../components/UI/Buttons/InvertedAddNewItemButton/InvertedAddNewItemButton";
 
 const Auth = (props) => {
-  const authState = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
   const history = useHistory();
-
   const goToLogIn = () => {
     history.push("/log_in");
   };

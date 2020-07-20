@@ -120,8 +120,8 @@ const CurrentWokrout = (props) => {
 
   return (
     <>
-      {showModal && (
         <Modal
+          show={showModal}
           headline="Empty exercises spotted!"
           info="All exercises should contain at least one set. Exercises without sets will not be added to Diary"
           cancelAction={handleCloseModal}
@@ -129,7 +129,7 @@ const CurrentWokrout = (props) => {
           confirmAction={handleContinueAndRemoveEmpty}
           cofirmActionLabel="Continue"
         />
-      )}
+      
       {editExerciseMode && (
         <ExerciseModifySets
           selectedExerciseName={selectedExercise}

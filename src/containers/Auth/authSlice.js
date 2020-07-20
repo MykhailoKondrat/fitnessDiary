@@ -60,6 +60,7 @@ export const authSlice = createSlice({
       state.refreshToken = null;
       state.expiresIn = null;
       state.loading = false;
+      state.error = null;
     },
   },
   extraReducers: {

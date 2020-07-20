@@ -25,18 +25,14 @@ const App = (props) => {
   const checkAuthOnLoad = () => {
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refreshToken");
+    const expirationTime = Date.parse(localStorage.getItem("expirationDate"));
     const currentTime = new Date();
+    console.log(currentTime ,  expirationTime);
+  
     if (!token) {
       dispatch(logoutActionCreator());
       clearLocalStorage();
-    } else if (currentTime > authState.expirationTime) {
-    } else {
-      const logInData = {
-        data: getUserDataFromStorage(),
-      };
-      dispatch(updateWorkoutHistoryOnReload());
-      dispatch(logIn.fulfilled(logInData));
-    }
+    } else if (currentTime > expirationTime) {
     dispatch(updateToken(refreshToken))
     .then(unwrapResult)
     .then((res) => {
@@ -47,11 +43,23 @@ const App = (props) => {
         res.data.refresh_token,
         res.data.expires_in
       );
+      
+      const logInData = {
+        data: getUserDataFromStorage(),
+      };
+      dispatch(logIn.fulfilled(logInData));
     })
     .catch((err) => {
       console.log(err);
     });
-  };
+  }else{
+      const logInData = {
+        data: getUserDataFromStorage(),
+      };
+      dispatch(updateWorkoutHistoryOnReload());
+      dispatch(logIn.fulfilled(logInData));
+    }};
+  
 
   useEffect(() => {
     checkAuthOnLoad();

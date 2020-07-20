@@ -2,32 +2,55 @@ import React, { useEffect, useState } from "react";
 import classes from "./Modal.module.scss";
 import AddNewItemButton from "../Buttons/AddNewItemButton/AddNewItemButton";
 import Backdrop from "../Backdrop/Backdrop";
-
+import Transition from "react-transition-group/cjs/Transition";
 const Modal = (props) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
   return (
-    <div className={classes.modal}>
-      <div className={classes.modalWrapper}>
-        <div className={classes.modalBody}>
-          <h2 className={classes.headline}>{props.headline}</h2>
-          <p className={classes.info}>{props.info}</p>
-          <div className={classes.actionButtonsWrapper}>
-            {props.cancelActionLabel && (
-              <AddNewItemButton click={props.cancelAction} buttonStyle="nested">
-                {props.cancelActionLabel}
-              </AddNewItemButton>
-            )}
-            <AddNewItemButton click={props.confirmAction} buttonStyle="nested">
-              {props.cofirmActionLabel}
-            </AddNewItemButton>
-          </div>
-        </div>
-      </div>
-      <Backdrop show click={props.cancelAction} />
-    </div>
+            <Transition in={props.show} timeout={300} mountOnEnter unmountOnExit>
+              {state => {
+                const modalWrapperClasses = [
+                classes.modal,
+                state === 'entering'
+                  ? classes.ModalOpen
+                  : state === 'exiting'
+                  ? classes.ModalClosed
+                  : null
+              ];
+                return (
+                  <>
+                    <div className={modalWrapperClasses.join(" ")} >
+
+                  <div className={classes.modalWrapper}>
+                    <div className={classes.modalBody}>
+                      <h2 className={classes.headline}>{props.headline}</h2>
+                      <p className={classes.info}>{props.info}</p>
+                      <div className={classes.actionButtonsWrapper}>
+                        {props.cancelActionLabel && (
+                          <AddNewItemButton click={props.cancelAction} buttonStyle="nested">
+                            {props.cancelActionLabel}
+                          </AddNewItemButton>
+                        )}
+                        <AddNewItemButton click={props.confirmAction} buttonStyle="nested">
+                          {props.cofirmActionLabel}
+                        </AddNewItemButton>
+                      </div>
+                    </div>
+                  </div>
+                      <Backdrop show click={props.cancelAction} />
+
+                    </div>
+                  </>
+              )
+              }}
+            </Transition>
+            
+    
+        
+      
+ 
   );
 };
 
