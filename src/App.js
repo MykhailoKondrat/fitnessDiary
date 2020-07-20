@@ -27,8 +27,6 @@ const App = (props) => {
     const refreshToken = localStorage.getItem("refreshToken");
     const expirationTime = Date.parse(localStorage.getItem("expirationDate"));
     const currentTime = new Date();
-    console.log(currentTime ,  expirationTime);
-  
     if (!token) {
       dispatch(logoutActionCreator());
       clearLocalStorage();
@@ -65,7 +63,7 @@ const App = (props) => {
 
   useEffect(() => {
     checkAuthOnLoad();
-  }, []);
+  }, [checkAuthOnLoad()]);
 
   let routes = null;
   if (authState.logedIn) {

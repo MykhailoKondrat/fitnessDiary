@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from "react";
-// import classes from './OnLoading.module.css';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Modal from "../../../components/UI/Modal /Modal";
 import { logoutActionCreator } from "../../Auth/authSlice";
-import Transition from "react-transition-group/cjs/Transition";
 
 const OnLoading = React.memo ((props) => {
   const dispatch = useDispatch();

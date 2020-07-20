@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./Modal.module.scss";
 import AddNewItemButton from "../Buttons/AddNewItemButton/AddNewItemButton";
 import Backdrop from "../Backdrop/Backdrop";
 import Transition from "react-transition-group/cjs/Transition";
 const Modal = (props) => {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => (document.body.style.overflow = "unset");
-  }, []);
   return (
-            <Transition in={props.show} timeout={300} mountOnEnter unmountOnExit>
+            <Transition in={props.show} timeout={300} mountOnEnter unmountOnExit
+            onEntered={()=>{
+              document.body.style.overflow = "hidden";
+            }}
+                        onExit={()=>{
+                          document.body.style.overflow = "unset"
+                        }}
+            >
               {state => {
                 const modalWrapperClasses = [
                 classes.modal,

@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+
 import { useHistory } from "react-router-dom";
 import classes from "./Auth.module.scss";
 import InvertedAddNewItemButton from "../../components/UI/Buttons/InvertedAddNewItemButton/InvertedAddNewItemButton";
