@@ -29,7 +29,7 @@ const App = (props) => {
     if (!token) {
       dispatch(logoutActionCreator());
       clearLocalStorage();
-    } else if (authState.expirationTime) {
+    } else if (currentTime > authState.expirationTime) {
     } else {
       const logInData = {
         data: getUserDataFromStorage(),
