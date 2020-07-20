@@ -21,6 +21,7 @@ $defaultFontSize: 16px;
   margin-bottom: 8px;
   width: 100%;
 }
+
 @mixin purpleButton {
   margin: auto;
   outline: none;
@@ -33,18 +34,33 @@ $defaultFontSize: 16px;
   cursor: pointer;
   &:hover{
     background: change-color($tetriaryColor,$saturation:50,$lightness: 40);
+
   }
   &:active{
     background: change-color($tetriaryColor,$saturation:60,$lightness: 30);
+    animation: enable 0.2s ease-in;
   }
   &:disabled{
     box-shadow:none;
     background:  change-color($tetriaryColor,$saturation:30,$lightness: 70);
     cursor: no-drop;
-
   }
-}
+  &:not(:disabled) {
+    animation: enable 0.2s ease-in;
+  }
+  @keyframes enable {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 
+}
 @mixin iconAction{
   width: 24px;
   height: 24px;

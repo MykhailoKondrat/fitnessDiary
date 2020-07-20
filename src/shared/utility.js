@@ -45,8 +45,6 @@ export const saveUserDataToLocalStorage = (
   expiresIn
 ) => {
   const expriationDate = new Date(new Date().getTime() + expiresIn * 1000);
-  console.log(expriationDate);
-  console.log(userId);
   localStorage.setItem("localId", userId);
   localStorage.setItem("token", token);
   localStorage.setItem("refreshToken", refreshToken);

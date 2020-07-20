@@ -15,7 +15,7 @@ import {
   logIn,
   updateToken,
 } from "./containers/Auth/authSlice";
-import { getUserDataFromStorage, clearLocalStorage } from "./shared/utility";
+import { getUserDataFromStorage, clearLocalStorage,saveUserDataToLocalStorage } from "./shared/utility";
 import { closeWorkoutActionCreator as updateWorkoutHistoryOnReload } from "./containers/Workouts/workoutsSlice";
 
 const App = (props) => {
@@ -28,6 +28,7 @@ const App = (props) => {
     const currentTime = new Date();
     if (!token) {
       dispatch(logoutActionCreator());
+      clearLocalStorage();
     } else if (authState.expirationTime) {
     } else {
       const logInData = {
@@ -37,13 +38,19 @@ const App = (props) => {
       dispatch(logIn.fulfilled(logInData));
     }
     dispatch(updateToken(refreshToken))
-      .then(unwrapResult)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(unwrapResult)
+    .then((res) => {
+      console.log('updating token');
+      saveUserDataToLocalStorage(
+        res.data.user_id,
+        res.data.id_token,
+        res.data.refresh_token,
+        res.data.expires_in
+      );
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   useEffect(() => {
