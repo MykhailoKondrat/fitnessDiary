@@ -65,7 +65,6 @@ const CurrentWokrout = (props) => {
       dispatch(updateWorkoutHistory(completedWokrout, token))
         .then(unwrapResult)
         .then((res) => {
-          console.log(res);
           dispatch(completeWorkoutActionCreator(completedWokrout));
         })
         .catch((error) => {
@@ -91,6 +90,7 @@ const CurrentWokrout = (props) => {
       (exercise) => exercise.reps.length !== 0
     );
     dispatch(addExerciseActionCreator(result));
+    setShowModal(false);
     return setcompleteWorkout(true);
   };
 

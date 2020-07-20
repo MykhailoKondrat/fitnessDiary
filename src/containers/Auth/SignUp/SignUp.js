@@ -5,7 +5,8 @@ import classes from "./SignUp.module.scss";
 import Input from "../../../components/UI/Inputs/Input/Input";
 import FloatingConfirmButton from "../../../components/UI/Buttons/FloatingConfirmButton/FloatingConfirmButton";
 import { signUp } from "../authSlice";
-import { checkValidity, updateObject } from "../../../shared/utility";
+import {checkValidity, saveUserDataToLocalStorage, updateObject} from "../../../shared/utility";
+import {unwrapResult} from "@reduxjs/toolkit";
 
 const SignUp = (props) => {
   const formConfig = {
@@ -103,6 +104,18 @@ const SignUp = (props) => {
         email: formState.email.value,
         password: formState.password.value,
       })
+    ).then(unwrapResult)
+    .then(res => {
+      saveUserDataToLocalStorage(
+        res.data.localId,
+        res.data.idToken,
+        res.data.refreshToken,
+        res.data.expiresIn
+      );
+    })
+    .catch(
+      err => {
+      }
     );
   };
 

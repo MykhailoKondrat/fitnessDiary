@@ -28,6 +28,7 @@ const App = (props) => {
     const expirationTime = Date.parse(localStorage.getItem("expirationDate"));
     const currentTime = new Date();
     if (!token) {
+      console.log('no token')
       dispatch(logoutActionCreator());
       clearLocalStorage();
     } else if (currentTime > expirationTime) {
@@ -63,7 +64,7 @@ const App = (props) => {
 
   useEffect(() => {
     checkAuthOnLoad();
-  }, [checkAuthOnLoad()]);
+  }, []);
 
   let routes = null;
   if (authState.logedIn) {

@@ -9,9 +9,9 @@ const Modal = (props) => {
             onEntered={()=>{
               document.body.style.overflow = "hidden";
             }}
-                        onExit={()=>{
-                          document.body.style.overflow = "unset"
-                        }}
+            onExit={()=>{
+               document.body.style.overflow = "unset";
+            }}
             >
               {state => {
                 const modalWrapperClasses = [
