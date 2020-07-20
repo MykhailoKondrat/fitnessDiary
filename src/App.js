@@ -51,6 +51,8 @@ const App = (props) => {
     })
     .catch((err) => {
       console.log(err);
+      dispatch(logoutActionCreator());
+      clearLocalStorage();
     });
   }else{
       const logInData = {
