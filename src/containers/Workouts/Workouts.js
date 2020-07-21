@@ -15,6 +15,10 @@ const Workouts = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  console.log(workoutHistory);
+  console.log(userData);
+  console.log(upToDate);
+
   const handleClick = () => {
     history.push("/add_exersices_to_workout");
   };
