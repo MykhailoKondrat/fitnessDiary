@@ -6,14 +6,14 @@ import { ReactComponent as FoodIcon } from "../../../assets/icons/002-dinner.svg
 
 const Navbar = (props) => {
   return (
-    <div className={classes.navbar}>
+    <nav className={classes.navbar}>
       <NavbarTab link="/workouts" className={classes.NavbarTab}>
         <DumbellIcon width="100%" height="32px" />
       </NavbarTab>
       <NavbarTab link="/diet">
         <FoodIcon width="100%" height="32px" />
       </NavbarTab>
-    </div>
+    </nav>
   );
 };
 

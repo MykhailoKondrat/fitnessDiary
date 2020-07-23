@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
-import Auth from "./containers/Auth/Auth";
-import Workouts from "./containers/Workouts/Workouts";
+// import Auth from "./containers/Auth/Auth";
+// import Workouts from "./containers/Workouts/Workouts";
 import DietTracker from "./containers/DietTracker/DietTracker";
-import Layout from "./containers/hoc/Layout/Layout";
-import AddExercises from "./containers/Exercises/AddExercises/AddExercises";
-import CurrentWokrout from "./containers/Workouts/CurrentWorkout/CurrentWokrout";
+// import Layout from "./containers/hoc/Layout/Layout";
+// import AddExercises from "./containers/Exercises/AddExercises/AddExercises";
+// import CurrentWokrout from "./containers/Workouts/CurrentWorkout/CurrentWokrout";
 import LogIn from "./containers/Auth/LogIn/LogIn";
 import SignUp from "./containers/Auth/SignUp/SignUp";
 import {
@@ -21,6 +21,24 @@ import {
   saveUserDataToLocalStorage,
 } from "./shared/utility";
 import { closeWorkoutActionCreator as updateWorkoutHistoryOnReload } from "./containers/Workouts/workoutsSlice";
+
+const Auth = React.lazy(() => {
+  return import("./containers/Auth/Auth");
+});
+const Workouts = React.lazy(() => {
+  return import("./containers/Workouts/Workouts");
+});
+const Layout = React.lazy(() => {
+  return import("./containers/hoc/Layout/Layout");
+});
+
+const AddExercises = React.lazy(() => {
+  return import("./containers/Exercises/AddExercises/AddExercises");
+});
+
+const CurrentWokrout = React.lazy(() => {
+  return import("./containers/Workouts/CurrentWorkout/CurrentWokrout");
+});
 
 const App = (props) => {
   const authState = useSelector((state) => state.auth);
@@ -106,7 +124,11 @@ const App = (props) => {
     );
   }
 
-  return <Switch>{routes}</Switch>;
+  return (
+    <Switch>
+      <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+    </Switch>
+  );
 };
 
 export default withRouter(App);

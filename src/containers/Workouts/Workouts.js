@@ -23,9 +23,9 @@ const Workouts = (props) => {
       return dispatch(fetchWorkoutHistory(queryParams));
     }
   }, [upToDate, userData.token, userData.userId, dispatch]);
+
   useEffect(() => {
     // to avoid re-fetching data if it was actually not changed and is up to date
-
     updateWorkoutHistory();
   }, [workoutHistory, updateWorkoutHistory]);
 

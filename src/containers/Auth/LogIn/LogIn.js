@@ -120,6 +120,7 @@ const LogIn = (props) => {
   return (
     <div className={classes.wrapper}>
       <h1 className={classes.headline}>Log In</h1>
+      <p>try test@test.com / 111111</p>
       <form onSubmit={(event) => handleLogIn(event)} className={classes.form}>
         {formElements.map((formElement) => {
           return (

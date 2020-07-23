@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { v1 as uuid } from "uuid";
@@ -13,7 +13,6 @@ import Modal from "../../../components/UI/Modal /Modal";
 import {
   addSetActionCreator,
   setSelectedExercisesActionCreator,
-  addExerciseActionCreator,
 } from "../../Exercises/exercisesSlice";
 import {
   updateWorkoutHistory,
@@ -27,11 +26,9 @@ const CurrentWokrout = (props) => {
     (state) => state.exercise.selectedExercises
   );
   const userData = useSelector((state) => state.auth);
-
   const [editExerciseMode, setEditExerciseMode] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [completeWorkout, setcompleteWorkout] = useState(false);
 
   const history = useHistory();
 
@@ -50,48 +47,49 @@ const CurrentWokrout = (props) => {
     setEditExerciseMode(true);
   };
 
-  const handleCompleteWorkout = useCallback(() => {
-    if (listOfExercises.length === 0) {
-      setcompleteWorkout(!completeWorkout);
+  const handleCompleteWorkout = () => {
+    // if (listOfExercises.length === 0) {
+    //   history.push("/workouts");
+    // } else {
+    const filteredListOfExercises = listOfExercises.filter(
+      (exercise) => exercise.reps.length !== 0
+    );
+    if (filteredListOfExercises.length === 0) {
       history.push("/workouts");
-    } else if (completeWorkout) {
+      console.log("0 000");
+    } else {
+      // if result length!=0
       const completedWokrout = {
+        exactDate: new Date(),
         date: currentDate,
-        exercises: listOfExercises,
+        exercises: filteredListOfExercises,
         id: uuid(),
         userId: userData.userId,
       };
       const token = `${userData.token}`;
       dispatch(updateWorkoutHistory(completedWokrout, token))
         .then(unwrapResult)
-        .then((res) => {
+        .then(() => {
           dispatch(completeWorkoutActionCreator(completedWokrout));
         })
         .catch((error) => {
+          alert("POST error!: ", error);
           console.log("POST error!: ", error);
         });
       dispatch(setSelectedExercisesActionCreator());
+      setShowModal(false);
+      document.body.style.overflow = "unset";
       history.push("/workouts");
     }
-  }, [listOfExercises]);
+    // }
+  };
+
   const checkEmptyExercises = () => {
     let hasEmptyExercises = false;
     hasEmptyExercises = listOfExercises.some(
       (exercise) => exercise.reps.length === 0
     );
-    return hasEmptyExercises
-      ? setShowModal(true)
-      : setcompleteWorkout(!completeWorkout);
-  };
-
-  const handleContinueAndRemoveEmpty = () => {
-    // handleCleanUpEmptyExercises();
-    const result = listOfExercises.filter(
-      (exercise) => exercise.reps.length !== 0
-    );
-    dispatch(addExerciseActionCreator(result));
-    setShowModal(false);
-    return setcompleteWorkout(true);
+    return hasEmptyExercises ? setShowModal(true) : handleCompleteWorkout();
   };
 
   const handleCloseAndUpdate = (sets) => {
@@ -114,10 +112,6 @@ const CurrentWokrout = (props) => {
     setShowModal(false);
   };
 
-  useEffect(() => {
-    handleCompleteWorkout();
-  }, [completeWorkout, handleCompleteWorkout]);
-
   return (
     <>
       <Modal
@@ -126,7 +120,7 @@ const CurrentWokrout = (props) => {
         info="All exercises should contain at least one set. Exercises without sets will not be added to Diary"
         cancelAction={handleCloseModal}
         cancelActionLabel="Cancel"
-        confirmAction={handleContinueAndRemoveEmpty}
+        confirmAction={handleCompleteWorkout}
         cofirmActionLabel="Continue"
       />
 

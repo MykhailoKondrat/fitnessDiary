@@ -13,7 +13,7 @@ const ExercisePreview = (props) => {
       : null;
 
   return (
-    <div className={classes.exercise}>
+    <section className={classes.exercise}>
       <div className={classes.headline}>
         <div>
           <p className={classes.exerciseName}>{props.name}</p>
@@ -36,7 +36,7 @@ const ExercisePreview = (props) => {
           return <li key={id}>{`${rep} x ${props.weight[id]}kg`}</li>;
         })}
       </ul>
-    </div>
+    </section>
   );
 };
 

@@ -35,7 +35,7 @@ const Toolbar = (props) => {
   // className={[classes.Button, classes[props.btnType]].join(' ')}
 
   return (
-    <div className={classes.Toolbar}>
+    <header className={classes.Toolbar}>
       <ToolbarButton
         className={classes.declineAction}
         click={props.declineAction}
@@ -52,7 +52,7 @@ const Toolbar = (props) => {
       >
         {confirmIcon}
       </ToolbarButton>
-    </div>
+    </header>
   );
 };
 
