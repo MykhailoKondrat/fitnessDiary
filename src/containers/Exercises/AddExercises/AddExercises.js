@@ -27,13 +27,13 @@ const AddExercises = (props) => {
   useEffect(() => {
     const updateAvailableExercises = () => {
       if (!upToDate) {
-        // if someone is reading this - sorry if this is a shit code, idk how to optimize it
-        // in another way \_('')_/
+        // if someone is reading this - sorry if this  code looks weird for you, idk how to optimize it
+        // in another way  ¯\_(ツ)_/¯
         return dispatch(fetchAvailableExercises());
       }
     };
     updateAvailableExercises();
-  }, []);
+  }, [upToDate, dispatch]);
 
   // if we come to this screen from workout - get list of prev selected exercises and render them as selected
   useEffect(() => {
@@ -42,7 +42,7 @@ const AddExercises = (props) => {
       prevSelectedExercises.push(ex.name);
     });
     setLocalSelectedExercises(prevSelectedExercises);
-  }, []);
+  }, [selectedExercises]);
 
   // Toolbar logic
   const history = useHistory();
@@ -104,7 +104,6 @@ const AddExercises = (props) => {
         return defaultResult;
       }
     );
-    console.log(localSelectedExercisesListToObject);
     dispatch(addExerciseActionCreator(localSelectedExercisesListToObject));
     history.push("/wokrout_in_progress");
   };

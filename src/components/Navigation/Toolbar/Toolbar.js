@@ -13,20 +13,19 @@ const Toolbar = (props) => {
   // It could be done with hooks but this props can't be changed by user, only via code
 
   const figureOutIconToUse = (icon) => {
-    let iconOutput = null;
     switch (icon) {
       case "Logout":
-        return (iconOutput = <LogoutIcon width="100%" height="32px" />);
+        return <LogoutIcon width="100%" height="32px" />;
       case "Confirm":
-        return (iconOutput = <CheckIcon width="100%" height="32px" />);
+        return <CheckIcon width="100%" height="32px" />;
       case "GoBack":
-        return (iconOutput = <GoBackIcon width="100%" height="32px" />);
+        return <GoBackIcon width="100%" height="32px" />;
       case "Menu":
-        return (iconOutput = <MenuIcon width="100%" height="32px" />);
+        return <MenuIcon width="100%" height="32px" />;
       case "Close":
-        return (iconOutput = <CloseIcon width="100%" height="32px" />);
+        return <CloseIcon width="100%" height="32px" />;
       default:
-        return (iconOutput = null);
+        return null;
     }
   };
   const confirmIcon = figureOutIconToUse(props.confirmIcon);

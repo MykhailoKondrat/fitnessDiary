@@ -3,10 +3,6 @@ import classes from "./ExerciseSelect.module.scss";
 import { ReactComponent as CheckIcon } from "../../../assets/icons/001-check.svg";
 
 const ExerciseSelect = (props) => {
-  // const handleOnChange = (e) => {
-  //   console.log(e.target.checked);
-  // };
-
   return (
     <>
       <input

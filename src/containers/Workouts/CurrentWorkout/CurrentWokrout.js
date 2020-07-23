@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { v1 as uuid } from "uuid";
@@ -50,7 +50,7 @@ const CurrentWokrout = (props) => {
     setEditExerciseMode(true);
   };
 
-  const handleCompleteWorkout = () => {
+  const handleCompleteWorkout = useCallback(() => {
     if (listOfExercises.length === 0) {
       setcompleteWorkout(!completeWorkout);
       history.push("/workouts");
@@ -73,7 +73,7 @@ const CurrentWokrout = (props) => {
       dispatch(setSelectedExercisesActionCreator());
       history.push("/workouts");
     }
-  };
+  }, [listOfExercises]);
   const checkEmptyExercises = () => {
     let hasEmptyExercises = false;
     hasEmptyExercises = listOfExercises.some(
@@ -120,16 +120,16 @@ const CurrentWokrout = (props) => {
 
   return (
     <>
-        <Modal
-          show={showModal}
-          headline="Empty exercises spotted!"
-          info="All exercises should contain at least one set. Exercises without sets will not be added to Diary"
-          cancelAction={handleCloseModal}
-          cancelActionLabel="Cancel"
-          confirmAction={handleContinueAndRemoveEmpty}
-          cofirmActionLabel="Continue"
-        />
-      
+      <Modal
+        show={showModal}
+        headline="Empty exercises spotted!"
+        info="All exercises should contain at least one set. Exercises without sets will not be added to Diary"
+        cancelAction={handleCloseModal}
+        cancelActionLabel="Cancel"
+        confirmAction={handleContinueAndRemoveEmpty}
+        cofirmActionLabel="Continue"
+      />
+
       {editExerciseMode && (
         <ExerciseModifySets
           selectedExerciseName={selectedExercise}

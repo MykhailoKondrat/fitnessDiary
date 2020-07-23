@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Workout from "../../components/Workout/Workout";
@@ -14,25 +14,20 @@ const Workouts = (props) => {
   let content = null;
   const dispatch = useDispatch();
   const history = useHistory();
-
-  console.log(workoutHistory);
-  console.log(userData);
-  console.log(upToDate);
-
   const handleClick = () => {
     history.push("/add_exersices_to_workout");
   };
-  const updateWorkoutHistory = () => {
+  const updateWorkoutHistory = useCallback(() => {
     const queryParams = `${userData.token}&orderBy="userId"&equalTo="${userData.userId}"`;
     if (!upToDate) {
       return dispatch(fetchWorkoutHistory(queryParams));
     }
-  };
+  }, [upToDate, userData.token, userData.userId, dispatch]);
   useEffect(() => {
     // to avoid re-fetching data if it was actually not changed and is up to date
 
     updateWorkoutHistory();
-  }, [workoutHistory]);
+  }, [workoutHistory, updateWorkoutHistory]);
 
   if (workoutHistory.length !== 0) {
     content = (

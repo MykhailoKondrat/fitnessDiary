@@ -44,7 +44,6 @@ export const updateToken = createAsyncThunk(
       grant_type: "refresh_token",
       refresh_token: refreshToken,
     };
-    console.log(data);
     const response = await axios.post(url, data);
     return response;
   }
