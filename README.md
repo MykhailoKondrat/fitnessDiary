@@ -1,3 +1,9 @@
+# Disclaimer 
+I've build this app at the very begining of my developer carreer, so if you take a risk to dive into a source code - pls don't judje me, I know it's bad :) 
+Keeping it here just to look back at it from time to time and evaluate my progress from that time. 
+# Live preview
+https://fitnessdiary-7595a.web.app/auth
+
 # Fitness diary 
 App to practice all skills I got from courses. 
 
